@@ -26,12 +26,12 @@ soon
 
 
 📦 src
-├── assets/ 
-├── components/  
-├── pages/ 
-├── Redux toolkit/  
-├── Styles/       
-├── Libraries/   
-├── Notes/  
-├── App.jsx
-└── main.jsx
+├── assets/                                   
+├── components/                         
+├── pages/                            
+├── Redux toolkit/                      
+├── Styles/                             
+├── Libraries/                          
+├── Notes/                               
+├── App.jsx                               
+└── main.jsx                 
