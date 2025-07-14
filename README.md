@@ -25,7 +25,7 @@ soon
 ## 📁 هيكل المشروع
 
 
-📦 src
+📦 src                                         
 ├── assets/                                   
 ├── components/                         
 ├── pages/                            
