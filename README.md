@@ -11,7 +11,7 @@
 - 💅 HTML /  CSS  / JavaScript ( Bootstrap & react-bootstrap ) 
 - 🛠️ React Router
 - 📦  Redux toolkit
-- 🔄 Axios أ
+- 🔄 Axios 
 - 🌐 (i18next) 
 
 ---
@@ -29,8 +29,9 @@ soon
 ├── assets/ 
 ├── components/  
 ├── pages/ 
-├── store/  (Redux toolkit)
-├── styles/       
-├── library/   
+├── Redux toolkit/  
+├── Styles/       
+├── Libraries/   
+├── Notes/  
 ├── App.jsx
 └── main.jsx
