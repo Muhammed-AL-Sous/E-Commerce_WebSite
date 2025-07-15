@@ -1,12 +1,37 @@
-# React + Vite
+# 🛍️ E-Commerce Web App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+متجر إلكتروني تم تطويره باستخدام React.js و Vite. يحتوي على واجهة مستخدم جذابة وتجربة تسوق سهلة للمستخدمين مع عرض المنتجات وسلة الشراء وصفحة تفاصيل المنتج.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 التقنيات المستخدمة
 
-## Expanding the ESLint configuration
+- ⚛️ React 19
+- ⚡ Vite
+- 💅 HTML /  CSS  / JavaScript ( Bootstrap & react-bootstrap ) 
+- 🛠️ React Router
+- 📦  Redux toolkit
+- 🔄 Axios 
+- 🌐 (i18next) 
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## 📸 صور من المشروع
+
+soon
+
+---
+
+## 📁 هيكل المشروع
+
+
+📦 src                                         
+├── assets/                                   
+├── components/                         
+├── pages/                            
+├── Redux toolkit/                      
+├── Styles/                             
+├── Libraries/                          
+├── Notes/                               
+├── App.jsx                               
+└── main.jsx                 
