@@ -13,10 +13,15 @@ import "./Library/FontAwesome.jsx";
 import { Provider } from "react-redux";
 import { store } from "./Redux/Store.jsx";
 
+// Browser Router
+import { BrowserRouter } from "react-router-dom";
+
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <Provider store={store}>
-      <App />
+      <BrowserRouter basename="/E-Commerce_WebSite">
+        <App />
+      </BrowserRouter>
     </Provider>
   </StrictMode>
 );
