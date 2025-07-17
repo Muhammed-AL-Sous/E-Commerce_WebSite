@@ -17,7 +17,7 @@ function Slider() {
   return (
     <Carousel activeIndex={index} onSelect={handleSelect}>
       <Carousel.Item style={{ backgroundColor: "#c23069cf" }}>
-        <div className="d-flex justify-content-center align-items-center mt-3 mb-0">
+        <div className="d-flex justify-content-center flex-column flex-md-row align-items-center mt-3 mb-0">
           <img
             src={carouselImg01}
             alt="slider-01"
@@ -33,7 +33,13 @@ function Slider() {
             >
               هناك خصم كبير
             </h3>
-            <p style={{ fontSize: "30px", fontWeight: "800" }}>
+            <p
+              style={{
+                fontSize: "30px",
+                fontWeight: "800",
+                textAlign: "center",
+              }}
+            >
               خصم يصل حتى 50% عند الشراء
             </p>
           </div>
@@ -41,7 +47,7 @@ function Slider() {
       </Carousel.Item>
 
       <Carousel.Item style={{ backgroundColor: "#09183bc7" }}>
-        <div className="d-flex justify-content-center align-items-center mt-3 mb-0">
+        <div className="d-flex justify-content-center flex-column flex-md-row align-items-center mt-3 mb-0">
           <img
             src={carouselImg02}
             alt="slider-01"
@@ -57,7 +63,13 @@ function Slider() {
             >
               هناك خصم كبير
             </h3>
-            <p style={{ fontSize: "30px", fontWeight: "800" }}>
+            <p
+              style={{
+                fontSize: "30px",
+                fontWeight: "800",
+                textAlign: "center",
+              }}
+            >
               خصم يصل حتى 50% عند الشراء
             </p>
           </div>
@@ -65,7 +77,7 @@ function Slider() {
       </Carousel.Item>
 
       <Carousel.Item style={{ backgroundColor: "#0d6efdcc" }}>
-        <div className="d-flex justify-content-center align-items-center mt-3 mb-0">
+        <div className="d-flex justify-content-center flex-column flex-md-row align-items-center mt-3 mb-0">
           <img
             src={carouselImg03}
             alt="slider-01"
@@ -81,7 +93,13 @@ function Slider() {
             >
               هناك خصم كبير
             </h3>
-            <p style={{ fontSize: "30px", fontWeight: "800" }}>
+            <p
+              style={{
+                fontSize: "30px",
+                fontWeight: "800",
+                textAlign: "center",
+              }}
+            >
               خصم يصل حتى 50% عند الشراء
             </p>
           </div>
@@ -89,7 +107,7 @@ function Slider() {
       </Carousel.Item>
 
       <Carousel.Item style={{ backgroundColor: "#daa050c7" }}>
-        <div className="d-flex justify-content-center align-items-center mt-3 mb-0">
+        <div className="d-flex justify-content-center flex-column flex-md-row align-items-center mt-3 mb-0">
           <img
             src={carouselImg04}
             alt="slider-01"
@@ -105,7 +123,13 @@ function Slider() {
             >
               هناك خصم كبير
             </h3>
-            <p style={{ fontSize: "30px", fontWeight: "800" }}>
+            <p
+              style={{
+                fontSize: "30px",
+                fontWeight: "800",
+                textAlign: "center",
+              }}
+            >
               خصم يصل حتى 50% عند الشراء
             </p>
           </div>

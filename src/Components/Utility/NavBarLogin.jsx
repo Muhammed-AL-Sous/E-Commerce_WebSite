@@ -4,6 +4,9 @@ import Form from "react-bootstrap/Form";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 
+// React Router
+import { Link } from "react-router-dom";
+
 // Images
 import Logo from "../../assets/images/logo.png";
 import login from "../../assets/images/login.png";
@@ -13,7 +16,7 @@ function NavBarLogin() {
   return (
     <Navbar expand="lg" bg="dark" variant="dark" className="sticky-top">
       <Container>
-        <Navbar.Brand href="#">
+        <Navbar.Brand href="/">
           <img src={Logo} alt="logo" className="w-75" />
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll" />
@@ -21,16 +24,18 @@ function NavBarLogin() {
           <Form.Control
             type="search"
             placeholder="ابحث"
-            className="me-2 w-100"
+            className="me-2 my-2 w-100"
             aria-label="Search"
           />
 
           <Nav
-            className="me-auto my-2 my-lg-0"
-            style={{ maxHeight: "100px" }}
+            className="me-auto my-2 my-lg-0 flex-row justify-content-around"
+            style={{ maxHeight: "100px", display: "flex" }}
             navbarScroll
           >
             <Nav.Link
+              as={Link}
+              to="/login"
               href="#action1"
               className="d-flex align-items-center justify-content-center"
             >
@@ -42,7 +47,10 @@ function NavBarLogin() {
                 دخول
               </p>
             </Nav.Link>
+
             <Nav.Link
+              as={Link}
+              to="/cart"
               href="#action2"
               className="d-flex align-items-center justify-content-center"
             >

@@ -6,7 +6,7 @@ import img from "../../assets/images/sale.png";
 
 const HomeCategories = () => {
   return (
-    <Container>
+    <Container >
       <SubTitle title="التصنيفات" btnTitle="المزيد" />
       <Row className="d-flex justify-content-center">
         <CategoryCard title="تخفيضات" backgroundColor="#eee" img={img} />
