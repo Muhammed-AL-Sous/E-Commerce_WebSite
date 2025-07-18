@@ -10,6 +10,7 @@ import {
   faHome,
   faPhoneVolume,
   faRightLeft,
+  faCircleUser,
 } from "@fortawesome/free-solid-svg-icons";
 
 // Brands Import
@@ -17,6 +18,7 @@ import {
   faFacebook,
   faGithub,
   faWhatsapp,
+  faInstagram,
 } from "@fortawesome/free-brands-svg-icons";
 
 // Add Icons To Library
@@ -29,5 +31,7 @@ library.add(
   faGithub,
   faWhatsapp,
   faPhoneVolume,
-  faRightLeft
+  faRightLeft,
+  faInstagram,
+  faCircleUser
 );

@@ -27,16 +27,16 @@ const Footer = () => {
           <ul className="list-unstyled d-flex justify-content-center justify-content-md-end m-0 gap-4 ">
             <li>
               <a
-                href="https://api.whatsapp.com/send?phone=9647503120748&amp;text="
+                href="https://www.instagram.com/acc.muhammed.al.sous/"
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{
                   fontSize: "20px",
-                  color: "#be0027",
+                  color: "#f56040",
                   cursor: "pointer",
                 }}
               >
-                <FontAwesomeIcon icon={["fas", "phone-volume"]} />
+                <FontAwesomeIcon icon={["fab", "instagram"]} />
               </a>
             </li>
             <li>
