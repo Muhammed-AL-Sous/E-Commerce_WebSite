@@ -3,6 +3,7 @@ import CategoriesHeader from "../../Components/Categories/CategoriesHeader";
 import SearchCountResult from "../../Components/Utility/SearchCountResult";
 import SideFilter from "../../Components/Utility/SideFilter";
 import ProductsContainer from "../../Components/Products/ProductsContainer";
+import Pagination from "../../Components/Utility/Pagination";
 const ShopProductsPage = () => {
   return (
     <>
@@ -17,6 +18,7 @@ const ShopProductsPage = () => {
             <ProductsContainer title="" btnTitle="" />
           </Col>
         </Row>
+        <Pagination />
       </Container>
     </>
   );
