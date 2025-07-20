@@ -2,10 +2,10 @@ import { Container, Row } from "react-bootstrap";
 import ProductCard from "./ProductCard";
 import SubTitle from "../Utility/SubTitle";
 
-const ProductsContainer = ({ title, btnTitle }) => {
+const ProductsContainer = ({ title, btnTitle, path }) => {
   return (
     <Container>
-      <SubTitle title={title} btnTitle={btnTitle} />
+      <SubTitle title={title} btnTitle={btnTitle} path={path} />
       <Row className="d-flex justify-content-center">
         <ProductCard />
         <ProductCard />

@@ -9,10 +9,22 @@ const HomePage = () => {
     <>
       <Slider />
       <HomeCategories />
-      <ProductsContainer title="الأكثر مبيعاً" btnTitle="المزيد" />
+      <ProductsContainer
+        title="الأكثر مبيعاً"
+        btnTitle="المزيد"
+        path="/products"
+      />
       <DiscountSection />
-      <ProductsContainer title="أحدث الأزياء" btnTitle="المزيد" />
-      <BrandsContainer title="أشهر الماركات" btnTitle="المزيد" />
+      <ProductsContainer
+        title="أحدث الأزياء"
+        btnTitle="المزيد"
+        path="/products"
+      />
+      <BrandsContainer
+        title="أشهر الماركات"
+        btnTitle="المزيد"
+        path="/allbrands"
+      />
     </>
   );
 };

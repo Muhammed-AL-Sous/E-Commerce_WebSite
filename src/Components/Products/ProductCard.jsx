@@ -1,12 +1,27 @@
+// React-BootStrap
 import { Col } from "react-bootstrap";
 import Card from "react-bootstrap/Card";
+import { Offcanvas, Button } from "react-bootstrap";
+
+// React Hooks
+import { useLocation } from "react-router-dom";
+
+// images
 import product from "../../assets/images/prod1.png";
 import fav from "../../assets/images/fav-off.png";
 import rate from "../../assets/images/rate.png";
 
 const ProductCard = () => {
+  // Resize Cards
+  const location = useLocation();
+  const isProductsPage = location.pathname.includes("/products");
+  const sm = isProductsPage ? 10 : 6;
+  const md = isProductsPage ? 6 : 5;
+  const xl = isProductsPage ? 4 : 3;
+  // ==== Resize Cards ==== //
+
   return (
-    <Col xs="12" sm="6" md="5" lg="4" xl="3" className="my-4">
+    <Col xs="12" sm={sm} md={md} lg="4" xl={xl} className="my-4">
       <Card
         className="shadow"
         style={{

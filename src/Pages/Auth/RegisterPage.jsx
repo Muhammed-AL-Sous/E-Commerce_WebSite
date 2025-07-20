@@ -71,6 +71,23 @@ const RegisterPage = () => {
           <Button variant="primary" type="submit" className="btn-register">
             إنشاء حساب
           </Button>
+
+          <Form.Text
+            style={{
+              display: "block",
+              marginTop: "20px",
+              textAlign: "center",
+              color: "white",
+            }}
+          >
+            لديك حساب بالفعل ؟
+            <Link
+              to="/login"
+              style={{ textDecoration: "none", fontWeight: "700" }}
+            >
+              <span className="me-2">تسجيل</span>
+            </Link>
+          </Form.Text>
         </Form>
       </Container>
     </div>

@@ -4,6 +4,9 @@ import HomePage from "./Pages/Home/HomePage";
 import Footer from "./Components/Utility/Footer";
 import LoginPage from "./Pages/Auth/LoginPage";
 import RegisterPage from "./Pages/Auth/RegisterPage";
+import AllCategoriesPage from "./Pages/Categories/AllCategoriesPage";
+import AllBrandsPage from "./Pages/Brands/AllBrandsPage";
+import ShopProductsPage from "./Pages/Products/ShopProductsPage";
 
 export const App = () => {
   const location = useLocation();
@@ -16,6 +19,9 @@ export const App = () => {
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
+        <Route path="/allcategories" element={<AllCategoriesPage />} />
+        <Route path="/AllBrands" element={<AllBrandsPage />} />
+        <Route path="/products" element={<ShopProductsPage />} />
       </Routes>
       {!HideNavAndFooter && <Footer />}
     </>
