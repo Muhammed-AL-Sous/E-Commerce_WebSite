@@ -1,12 +1,18 @@
-import NavBarLogin from "./Components/Utility/NavBarLogin";
+// React Router Dom
 import { Routes, Route, useLocation } from "react-router-dom";
-import HomePage from "./Pages/Home/HomePage";
+
+// Components
+import NavBarLogin from "./Components/Utility/NavBarLogin";
 import Footer from "./Components/Utility/Footer";
+
+// Pages
+import HomePage from "./Pages/Home/HomePage";
 import LoginPage from "./Pages/Auth/LoginPage";
 import RegisterPage from "./Pages/Auth/RegisterPage";
 import AllCategoriesPage from "./Pages/Categories/AllCategoriesPage";
 import AllBrandsPage from "./Pages/Brands/AllBrandsPage";
 import ShopProductsPage from "./Pages/Products/ShopProductsPage";
+import ProductDetailsPage from "./Pages/Products/ProductDetailsPage";
 
 export const App = () => {
   const location = useLocation();
@@ -22,6 +28,7 @@ export const App = () => {
         <Route path="/allcategories" element={<AllCategoriesPage />} />
         <Route path="/AllBrands" element={<AllBrandsPage />} />
         <Route path="/products" element={<ShopProductsPage />} />
+        <Route path="/products/:id" element={<ProductDetailsPage />} />
       </Routes>
       {!HideNavAndFooter && <Footer />}
     </>

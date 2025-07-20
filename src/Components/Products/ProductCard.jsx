@@ -4,7 +4,7 @@ import Card from "react-bootstrap/Card";
 import { Offcanvas, Button } from "react-bootstrap";
 
 // React Hooks
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 // images
 import product from "../../assets/images/prod1.png";
@@ -30,11 +30,13 @@ const ProductCard = () => {
           backgroundColor: "white",
         }}
       >
-        <Card.Img
-          variant="top"
-          src={product}
-          style={{ width: "100%", height: "228px" }}
-        />
+        <Link to={`/products/id`}>
+          <Card.Img
+            variant="top"
+            src={product}
+            style={{ width: "100%", height: "228px" }}
+          />
+        </Link>
         <div className="d-flex justify-content-end mx-3">
           <img src={fav} alt="" style={{ width: "35px", height: "35px" }} />
         </div>
