@@ -3,14 +3,16 @@ import CategoriesHeader from "../../Components/Categories/CategoriesHeader";
 import ProductDetails from "../../Components/Products/ProductDetails";
 import "../../Styles/ProductDetailsPageStyles.css";
 import RateContainer from "../../Components/Rate/RateContainer";
+import ProductsContainer from "../../Components/Products/ProductsContainer";
 
 const ProductDetailsPage = () => {
   return (
-    <div style={{ backgroundColor: "#f9f9f9", padding: "10px" }}>
+    <div style={{ minHeight: "425px" }}>
+      <CategoriesHeader />
       <Container>
-        <CategoriesHeader />
         <ProductDetails />
         <RateContainer />
+        <ProductsContainer title="منتجات قد تعجبك" />
       </Container>
     </div>
   );

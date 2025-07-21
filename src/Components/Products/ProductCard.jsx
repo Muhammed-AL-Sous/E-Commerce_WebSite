@@ -14,7 +14,8 @@ import rate from "../../assets/images/rate.png";
 const ProductCard = () => {
   // Resize Cards
   const location = useLocation();
-  const isProductsPage = location.pathname.includes("/products");
+  // const isProductsPage = location.pathname.includes("/products");
+  const isProductsPage = location.pathname === "/products";
   const sm = isProductsPage ? 10 : 6;
   const md = isProductsPage ? 6 : 5;
   const xl = isProductsPage ? 4 : 3;

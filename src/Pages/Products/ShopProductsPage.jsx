@@ -6,9 +6,9 @@ import ProductsContainer from "../../Components/Products/ProductsContainer";
 import Pagination from "../../Components/Utility/Pagination";
 const ShopProductsPage = () => {
   return (
-    <>
+    <div style={{ minHeight: "100vh" }}>
+      <CategoriesHeader />
       <Container>
-        <CategoriesHeader />
         <SearchCountResult title="400 نتيجة بحث" />
         <Row className="mt-4">
           <Col xs="0" md="3" lg="2">
@@ -20,7 +20,7 @@ const ShopProductsPage = () => {
         </Row>
         <Pagination />
       </Container>
-    </>
+    </div>
   );
 };
 

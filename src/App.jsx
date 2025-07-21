@@ -13,6 +13,7 @@ import AllCategoriesPage from "./Pages/Categories/AllCategoriesPage";
 import AllBrandsPage from "./Pages/Brands/AllBrandsPage";
 import ShopProductsPage from "./Pages/Products/ShopProductsPage";
 import ProductDetailsPage from "./Pages/Products/ProductDetailsPage";
+import CartPage from "./Pages/Cart/CartPage";
 
 export const App = () => {
   const location = useLocation();
@@ -29,6 +30,7 @@ export const App = () => {
         <Route path="/AllBrands" element={<AllBrandsPage />} />
         <Route path="/products" element={<ShopProductsPage />} />
         <Route path="/products/:id" element={<ProductDetailsPage />} />
+        <Route path="/cart" element={<CartPage />} />
       </Routes>
       {!HideNavAndFooter && <Footer />}
     </>

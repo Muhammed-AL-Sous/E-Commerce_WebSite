@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 const SearchCountResult = ({ title }) => {
   const handler = () => {};
   return (
-    <div className="d-flex justify-content-between align-items-center ">
+    <div className="d-flex justify-content-between mt-3 align-items-center ">
       <div>
         <h3 className="fw-semibold fs-4 m-0">{title}</h3>
       </div>

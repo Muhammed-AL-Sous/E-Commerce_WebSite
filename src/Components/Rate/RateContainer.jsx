@@ -2,10 +2,14 @@ import { Col, Row } from "react-bootstrap";
 import rate from "../../assets/images/rate.png";
 import Ratings_And_Reviews from "./Ratings_And_Reviews";
 import RatePost from "./RatePost";
+import Pagination from "../Utility/Pagination";
 
 const RateContainer = () => {
   return (
-    <div className="shadow rounded-3 p-3">
+    <div
+      className="shadow rounded-3 mt-5 p-3"
+      style={{ backgroundColor: "#f6f6f6" }}
+    >
       <Row>
         <Col xs="12">
           <h4 className="mx-2">التقييمات</h4>
@@ -35,6 +39,7 @@ const RateContainer = () => {
       <Ratings_And_Reviews />
       <Ratings_And_Reviews />
       <Ratings_And_Reviews />
+      <Pagination />
     </div>
   );
 };

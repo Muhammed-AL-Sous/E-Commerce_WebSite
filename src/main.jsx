@@ -15,11 +15,13 @@ import { store } from "./Redux/Store.jsx";
 
 // Browser Router
 import { BrowserRouter } from "react-router-dom";
+import ScrollToTop from "./Components/Utility/ScrollToTop.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <Provider store={store}>
       <BrowserRouter basename="/E-Commerce_WebSite">
+        <ScrollToTop />
         <App />
       </BrowserRouter>
     </Provider>
