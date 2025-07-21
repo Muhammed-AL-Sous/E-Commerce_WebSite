@@ -2,7 +2,10 @@ import { Button } from "react-bootstrap";
 
 const ProductDescription = () => {
   return (
-    <div className="shadow p-4 rounded-4">
+    <div
+      className="shadow p-4 rounded-4"
+      style={{ backgroundColor: "#e1ccac26" }}
+    >
       <div className="mb-4">
         <h4 className="text-muted fw-bolder">الإلكترونيات :</h4>
         <p className="text-secondary fw-semibold mb-1">
@@ -73,9 +76,9 @@ const ProductDescription = () => {
           طبيعي، تيتانيوم أبيض، تيتانيوم أسود
         </p>
       </div>
-      <div>
+      <div className="d-flex align-items-center">
         <span
-          className="text-secondary  fw-semibold rounded-2"
+          className="text-secondary fw-semibold rounded-2"
           style={{
             padding: "7px 20px",
             margin: "0 5px",
@@ -84,12 +87,17 @@ const ProductDescription = () => {
         >
           500$
         </span>
-        <Button
-          variant="secondary"
-          style={{ backgroundColor: "#272727", padding: "8px 10px" }}
+        <span
+          style={{
+            backgroundColor: "#272727",
+            padding: "8px 10px",
+            color: "white",
+            borderRadius: "0.375rem",
+            cursor: "pointer",
+          }}
         >
           أضف للسلة
-        </Button>
+        </span>
       </div>
     </div>
   );

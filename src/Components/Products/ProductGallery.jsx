@@ -20,7 +20,7 @@ const ProductGallery = () => {
   ];
 
   return (
-    <div className="shadow p-3 rounded-4 mb-4">
+    <div className="shadow p-3 rounded-4 mb-4" style={{backgroundColor:"#e1ccac26"}}>
       <ImageGallery
         items={images}
         defaultImage={mobile}

@@ -47,3 +47,7 @@
   -ms-transform: translateX(2%) !important;
   -o-transform: translateX(2%) !important;
 }
+
+.image-gallery-content .image-gallery-slide .image-gallery-image {
+  cursor: auto !important;
+}

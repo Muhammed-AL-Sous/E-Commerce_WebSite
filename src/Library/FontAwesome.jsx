@@ -1,5 +1,4 @@
 // A Customized File For Collecting Icons
-
 import { library } from "@fortawesome/fontawesome-svg-core";
 
 // Solid Import
@@ -13,6 +12,8 @@ import {
   faCircleUser,
   faArrowDownShortWide,
   faFilter,
+  faStar,
+  faStarHalf,
 } from "@fortawesome/free-solid-svg-icons";
 
 // Brands Import
@@ -37,5 +38,7 @@ library.add(
   faInstagram,
   faCircleUser,
   faArrowDownShortWide,
-  faFilter
+  faFilter,
+  faStar,
+  faStarHalf
 );
