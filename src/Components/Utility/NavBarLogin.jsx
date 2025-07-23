@@ -16,8 +16,8 @@ function NavBarLogin() {
   return (
     <Navbar expand="lg" bg="dark" variant="dark" className="sticky-top">
       <Container>
-        <Navbar.Brand href="/">
-          <img src={Logo} alt="logo" className="w-75" />
+        <Navbar.Brand href="/" style={{ width: "90px", padding: "0px 0px 0px 5px" }}>
+          <img src={Logo} alt="logo" className="w-100" />
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">

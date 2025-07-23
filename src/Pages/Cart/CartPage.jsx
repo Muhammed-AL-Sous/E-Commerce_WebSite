@@ -1,6 +1,6 @@
 import { Col, Container, Row } from "react-bootstrap";
 import CartItem from "../../Components/Cart/CartItem";
-import CartCheckout from "./CartCheckout";
+import CartCheckout from "../../Components/Cart/CartCheckout";
 
 const CartPage = () => {
   return (

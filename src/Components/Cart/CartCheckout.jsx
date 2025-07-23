@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const CartCheckout = () => {
   return (
-    <Row className="shadow rounded-4 justify-content-center">
+    <Row className="shadow rounded-4 ">
       <Col className="d-flex justify-content-center flex-column p-3">
         <div className="d-flex justify-content-center align-items-center">
           <input

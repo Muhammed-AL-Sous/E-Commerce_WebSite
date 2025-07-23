@@ -74,6 +74,14 @@ const LoginPage = () => {
           </Form.Text>
         </Form>
       </Container>
+      <Link to="/admin/allproducts">
+        <Button
+          variant="primary"
+          style={{ position: "absolute", bottom: "20px", right: "20px" , zIndex:"20" }}
+        >
+          <span>الدخول بحساب المدير</span>
+        </Button>
+      </Link>
     </div>
   );
 };

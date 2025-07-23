@@ -4,6 +4,7 @@ import SearchCountResult from "../../Components/Utility/SearchCountResult";
 import SideFilter from "../../Components/Utility/SideFilter";
 import ProductsContainer from "../../Components/Products/ProductsContainer";
 import Pagination from "../../Components/Utility/Pagination";
+
 const ShopProductsPage = () => {
   return (
     <div style={{ minHeight: "100vh" }}>

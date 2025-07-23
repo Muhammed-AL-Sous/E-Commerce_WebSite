@@ -14,6 +14,8 @@ import AllBrandsPage from "./Pages/Brands/AllBrandsPage";
 import ShopProductsPage from "./Pages/Products/ShopProductsPage";
 import ProductDetailsPage from "./Pages/Products/ProductDetailsPage";
 import CartPage from "./Pages/Cart/CartPage";
+import PaymentmethodPage from "./Pages/Checkout/PaymentmethodPage";
+import AdminAllProductsPage from "./Pages/Admin/AdminAllProductsPage";
 
 export const App = () => {
   const location = useLocation();
@@ -31,6 +33,8 @@ export const App = () => {
         <Route path="/products" element={<ShopProductsPage />} />
         <Route path="/products/:id" element={<ProductDetailsPage />} />
         <Route path="/cart" element={<CartPage />} />
+        <Route path="/order/paymentmethod" element={<PaymentmethodPage />} />
+        <Route path="/admin/allproducts" element={<AdminAllProductsPage />} />
       </Routes>
       {!HideNavAndFooter && <Footer />}
     </>
