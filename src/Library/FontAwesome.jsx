@@ -15,6 +15,11 @@ import {
   faStar,
   faStarHalf,
   faTrashCan,
+  faBoxOpen,
+  faClipboardList,
+  faTags,
+  faPlus,
+  faSitemap,
 } from "@fortawesome/free-solid-svg-icons";
 
 // Brands Import
@@ -42,5 +47,10 @@ library.add(
   faFilter,
   faStar,
   faStarHalf,
-  faTrashCan
+  faTrashCan,
+  faBoxOpen,
+  faClipboardList,
+  faTags,
+  faPlus,
+  faSitemap
 );

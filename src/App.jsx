@@ -16,6 +16,10 @@ import ProductDetailsPage from "./Pages/Products/ProductDetailsPage";
 import CartPage from "./Pages/Cart/CartPage";
 import PaymentmethodPage from "./Pages/Checkout/PaymentmethodPage";
 import AdminAllProductsPage from "./Pages/Admin/AdminAllProductsPage";
+import AdminAllOrdersPage from "./Pages/Admin/AdminAllOrdersPage";
+import AdminLayout from "./Components/Utility/AdminLayout";
+import AdminOrderDetailsPage from "./Pages/Admin/AdminOrderDetailsPage";
+import AdminOrdersList from "./Components/Admin/AdminOrdersList";
 
 export const App = () => {
   const location = useLocation();
@@ -34,7 +38,17 @@ export const App = () => {
         <Route path="/products/:id" element={<ProductDetailsPage />} />
         <Route path="/cart" element={<CartPage />} />
         <Route path="/order/paymentmethod" element={<PaymentmethodPage />} />
-        <Route path="/admin/allproducts" element={<AdminAllProductsPage />} />
+
+        <Route path="/admin" element={<AdminLayout />}>
+          <Route path="allproducts" index element={<AdminAllProductsPage />} />
+          {/* Parent Route للطلبات */}
+          <Route path="allorders" element={<AdminAllOrdersPage />}>
+            {/* index يعرض قائمة الطلبات */}
+            <Route index element={<AdminOrdersList />} />
+            {/* تفاصيل الطلب */}
+            <Route path="details/:id" element={<AdminOrderDetailsPage />} />
+          </Route>
+        </Route>
       </Routes>
       {!HideNavAndFooter && <Footer />}
     </>
