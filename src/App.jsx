@@ -20,6 +20,12 @@ import AdminAllOrdersPage from "./Pages/Admin/AdminAllOrdersPage";
 import AdminLayout from "./Components/Utility/AdminLayout";
 import AdminOrderDetailsPage from "./Pages/Admin/AdminOrderDetailsPage";
 import AdminOrdersList from "./Components/Admin/AdminOrdersList";
+import AdminAddBrandPage from "./Pages/Admin/AdminAddBrandPage";
+import AdminAddCategoryPage from "./Pages/Admin/AdminAddCategoryPage";
+import AdminAddSubCategoryPage from "./Pages/Admin/AdminAddSubCategoryPage";
+import AdminAddProductPage from "./Pages/Admin/AdminAddProductPage";
+import UserLayout from "./Components/Utility/UserLayout";
+import UserAllOrdersPage from "./Pages/User/UserAllOrdersPage";
 
 export const App = () => {
   const location = useLocation();
@@ -39,8 +45,14 @@ export const App = () => {
         <Route path="/cart" element={<CartPage />} />
         <Route path="/order/paymentmethod" element={<PaymentmethodPage />} />
 
+        {/* Admin Pages */}
         <Route path="/admin" element={<AdminLayout />}>
           <Route path="allproducts" index element={<AdminAllProductsPage />} />
+          <Route path="addbrand" element={<AdminAddBrandPage />} />
+          <Route path="addcategory" element={<AdminAddCategoryPage />} />
+          <Route path="addsubcategory" element={<AdminAddSubCategoryPage />} />
+          <Route path="addproduct" element={<AdminAddProductPage />} />
+
           {/* Parent Route للطلبات */}
           <Route path="allorders" element={<AdminAllOrdersPage />}>
             {/* index يعرض قائمة الطلبات */}
@@ -49,6 +61,13 @@ export const App = () => {
             <Route path="details/:id" element={<AdminOrderDetailsPage />} />
           </Route>
         </Route>
+        {/*==== Admin Pages ====*/}
+
+        {/* User Pages */}
+        <Route path="/user" element={<UserLayout />}>
+          <Route path="allorders" index element={<UserAllOrdersPage />} />
+        </Route>
+        {/*==== User Pages ====*/}
       </Routes>
       {!HideNavAndFooter && <Footer />}
     </>

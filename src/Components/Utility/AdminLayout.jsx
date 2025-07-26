@@ -7,7 +7,11 @@ import { useLocation } from "react-router-dom";
 const AdminLayout = () => {
   const location = useLocation();
 
-  const hidePagination = location.pathname.includes("/admin/allorders/details");
+  const hidePagination = [
+    "/admin/allorders/details",
+    "/admin/addbrand",
+    "/admin/addproduct",
+  ].includes(location.pathname);
   return (
     <Container>
       <Row className="py-4">

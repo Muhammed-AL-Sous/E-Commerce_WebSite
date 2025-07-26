@@ -77,9 +77,27 @@ const LoginPage = () => {
       <Link to="/admin/allproducts">
         <Button
           variant="primary"
-          style={{ position: "absolute", bottom: "20px", right: "20px" , zIndex:"20" }}
+          style={{
+            position: "absolute",
+            bottom: "70px",
+            right: "20px",
+            zIndex: "20",
+          }}
         >
           <span>الدخول بحساب المدير</span>
+        </Button>
+      </Link>
+      <Link to="/user/allorders">
+        <Button
+          variant="warning"
+          style={{
+            position: "absolute",
+            bottom: "20px",
+            right: "20px",
+            zIndex: "20",
+          }}
+        >
+          <span>الدخول بحساب المستخدم</span>
         </Button>
       </Link>
     </div>

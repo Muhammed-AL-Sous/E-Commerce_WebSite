@@ -28,6 +28,7 @@
     "react-rating": "^2.0.5",
     "react-redux": "^9.2.0",
     "react-router-dom": "^7.6.3",
+    "react-select": "^5.10.2",
     "unop-react-dropdown": "^0.2.3"
   },
   "devDependencies": {

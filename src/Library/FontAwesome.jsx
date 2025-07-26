@@ -20,6 +20,8 @@ import {
   faTags,
   faPlus,
   faSitemap,
+  faHeart,
+  faLocationDot,
 } from "@fortawesome/free-solid-svg-icons";
 
 // Brands Import
@@ -52,5 +54,7 @@ library.add(
   faClipboardList,
   faTags,
   faPlus,
-  faSitemap
+  faSitemap,
+  faHeart,
+  faLocationDot
 );
