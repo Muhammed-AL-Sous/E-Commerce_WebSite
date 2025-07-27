@@ -26,6 +26,11 @@ import AdminAddSubCategoryPage from "./Pages/Admin/AdminAddSubCategoryPage";
 import AdminAddProductPage from "./Pages/Admin/AdminAddProductPage";
 import UserLayout from "./Components/Utility/UserLayout";
 import UserAllOrdersPage from "./Pages/User/UserAllOrdersPage";
+import UserfavoriteProductsPage from "./Pages/User/UserfavoriteProductsPage";
+import UserAddressPage from "./Pages/User/UserAddressPage";
+import UserAddAddressPage from "./Pages/User/UserAddAddressPage";
+import UserEditAddressPage from "./Pages/User/UserEditAddressPage";
+import UserProfilePage from "./Pages/User/UserProfilePage";
 
 export const App = () => {
   const location = useLocation();
@@ -66,6 +71,11 @@ export const App = () => {
         {/* User Pages */}
         <Route path="/user" element={<UserLayout />}>
           <Route path="allorders" index element={<UserAllOrdersPage />} />
+          <Route path="favorites" element={<UserfavoriteProductsPage />} />
+          <Route path="address" element={<UserAddressPage />} />
+          <Route path="add-address" element={<UserAddAddressPage />} />
+          <Route path="edit-address" element={<UserEditAddressPage />} />
+          <Route path="Profile" element={<UserProfilePage />} />
         </Route>
         {/*==== User Pages ====*/}
       </Routes>

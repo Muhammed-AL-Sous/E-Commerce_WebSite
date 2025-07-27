@@ -6,7 +6,7 @@ const menuItems = [
   { name: "إدارة الطلبات", path: "/user/allorders", icon: "clipboard-list" },
   { name: "قائمة المفضلة", path: "/user/favorites", icon: "heart" },
   { name: "العناوين الشخصية", path: "/user/address", icon: "location-dot" },
-  { name: "الملف الشخصي", path: "/user/userProfile", icon: "user" },
+  { name: "الملف الشخصي", path: "/user/Profile", icon: "user" },
 ];
 
 const UserSideBar = () => {

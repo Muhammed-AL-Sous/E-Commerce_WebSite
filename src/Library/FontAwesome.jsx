@@ -22,6 +22,7 @@ import {
   faSitemap,
   faHeart,
   faLocationDot,
+  faPenToSquare,
 } from "@fortawesome/free-solid-svg-icons";
 
 // Brands Import
@@ -56,5 +57,6 @@ library.add(
   faPlus,
   faSitemap,
   faHeart,
-  faLocationDot
+  faLocationDot,
+  faPenToSquare
 );

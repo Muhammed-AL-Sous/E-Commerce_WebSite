@@ -15,7 +15,9 @@ const ProductCard = () => {
   // Resize Cards
   const location = useLocation();
   // const isProductsPage = location.pathname.includes("/products");
-  const isProductsPage = location.pathname === "/products";
+  const isProductsPage =
+    location.pathname === "/products" ||
+    location.pathname === "/user/favorites";
   const sm = isProductsPage ? 10 : 6;
   const md = isProductsPage ? 6 : 5;
   const xl = isProductsPage ? 4 : 3;
