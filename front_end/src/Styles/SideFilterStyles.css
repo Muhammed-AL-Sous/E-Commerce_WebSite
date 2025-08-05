@@ -1,0 +1,56 @@
+.main-classes,
+.main-brands,
+.main-prices {
+  margin-bottom: 5px;
+}
+
+.main-classes > h3,
+.main-brands > h3,
+.main-prices > h3 {
+  font-size: 25px;
+  font-weight: 700;
+}
+
+.main-classes label,
+.main-brands label,
+.main-prices label {
+  margin-right: 10px;
+  margin-bottom: 5px;
+  font-weight: 600;
+  font-size: 15px;
+  position: relative;
+  top: -1px;
+}
+
+.main-classes div > input[type="checkbox"],
+.main-brands div > input[type="checkbox"],
+.main-prices div > input[type="checkbox"] {
+  cursor: pointer;
+}
+
+.main-prices div > input[type="number"]:first-of-type {
+  width: 70px;
+  margin-right: 10px;
+  margin-bottom: 5px;
+  outline: none;
+}
+.main-prices div:last-of-type > input[type="number"] {
+  width: 70px;
+  margin-right: 12px;
+  outline: none;
+}
+
+/* ========================================= */
+
+/* Start offcanvas */
+
+.offcanvas.offcanvas-end.show {
+  background-color: #f9f9f9 !important;
+}
+
+.offcanvas-header .btn-close {
+  margin-right: auto !important;
+  margin-left: unset !important;
+}
+
+/* End offcanvas */

@@ -1,0 +1,12 @@
+.sub-title {
+  color: #333;
+  font-weight: 700;
+  margin: 0px;
+  font-size: 30px;
+}
+
+.more-btn {
+  font-size: 17px !important;
+  font-weight: 600 !important;
+  padding: 8px 20px !important;
+}

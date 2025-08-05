@@ -1,0 +1,87 @@
+.user-main-div-side-bar {
+  padding: 0.5rem !important;
+  border-radius: 0.5rem;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+  width: 100%;
+  min-height: 100vh;
+}
+
+.user-ul-list-side-bar {
+  text-align: center !important;
+  display: flex;
+  flex-direction: column;
+  align-items: center !important;
+  gap: 0.25rem !important;
+  width: 100% !important;
+  padding-left: 0;
+  list-style: none;
+}
+
+.user-list-side-bar {
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+  -webkit-transition: 0.3s;
+  -moz-transition: 0.3s;
+  -ms-transition: 0.3s;
+  -o-transition: 0.3s;
+  margin-bottom: 5px;
+  border-bottom: 1px solid #ccc;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  color: gray;
+}
+
+.user-list-side-bar:hover {
+  border-radius: 0.375rem;
+  background-color: #272727;
+}
+.user-list-side-bar:hover > .icon {
+  color: white;
+}
+
+@media (max-width: 991px) {
+  .user-list-side-bar {
+    font-size: 13px;
+    flex-direction: column;
+  }
+
+  .user-list-side-bar .icon {
+    margin-right: 0 !important;
+    margin-top: 5px;
+  }
+}
+
+@media (min-width: 768px) {
+  .user-list-side-bar {
+    width: 100%;
+  }
+}
+
+.user-sidebar-link {
+  color: gray;
+}
+
+.user-list-side-bar:has(a.active-link) {
+  border-bottom: none;
+  background-color: #272727;
+  color: white !important;
+  border-radius: 0.375rem;
+}
+
+.user-list-side-bar:has(a.active-link) > a {
+  color: white;
+}
+
+.user-list-side-bar > a {
+  width: 100%;
+  text-decoration: none;
+  display: block;
+  padding: 0.4rem;
+}
+
+.user-list-side-bar:hover .user-sidebar-link {
+  color: white !important;
+  border-bottom: none;
+}

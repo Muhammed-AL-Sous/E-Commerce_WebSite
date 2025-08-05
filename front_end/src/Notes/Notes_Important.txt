@@ -1,0 +1,74 @@
+For Font Awesome Library
+
+// To install the required packages
+// npm install --save @fortawesome/fontawesome-svg-core
+// npm install --save @fortawesome/free-solid-svg-icons
+// npm i --save @fortawesome/react-fontawesome@latest
+
+// Brands
+// npm install --save @fortawesome/free-brands-svg-icons
+
+// Regular
+// npm install --save @fortawesome/free-regular-svg-icons
+
+==========
+
+we Create File : 
+
+// A Customized File For Collecting Icons
+
+import { library } from "@fortawesome/fontawesome-svg-core";
+import {
+  faUser,
+  faLock,
+  faEnvelope,
+  faHome,
+} from "@fortawesome/free-solid-svg-icons";
+
+import { faFacebook } from "@fortawesome/free-brands-svg-icons";
+
+library.add(faUser, faLock, faEnvelope, faHome, faFacebook);
+
+==========
+
+ then : 
+
+in Component we use : 
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+then :
+
+<FontAwesomeIcon icon={["fab", "facebook"]} />
+
+<FontAwesomeIcon icon="user" />
+
+
+
+
+
+
+✅ القواعد الأساسية:
+✔ إذا كانت الأيقونة Solid → تكتب باسمها فقط في JSX ("user", "phone-volume")
+✔ إذا كانت الأيقونة Brands → يجب إضافة ['fab', 'اسم'] (لأنها تابعة لمجموعة الـ Brands).
+✔ في JSX:
+
+كلمتين أو أكثر → استخدم kebab-case مثل: phone-volume.
+
+كلمة واحدة → استخدمها كما هي: user, home.
+
+| ---------- | ---------------------- | ------------------------------------------------ |
+| **Solid**  | `faUser`               | `<FontAwesomeIcon icon="user" />`                |
+| **Solid**  | `faLock`               | `<FontAwesomeIcon icon="lock" />`                |
+| **Solid**  | `faEnvelope`           | `<FontAwesomeIcon icon="envelope" />`            |
+| **Solid**  | `faHome`               | `<FontAwesomeIcon icon="home" />`                |
+| **Solid**  | `faPhone`              | `<FontAwesomeIcon icon="phone" />`               |
+| **Solid**  | `faPhoneVolume`        | `<FontAwesomeIcon icon="phone-volume" />`        |
+| **Solid**  | `faEnvelopeOpenText`   | `<FontAwesomeIcon icon="envelope-open-text" />`  |
+| **Brands** | `faFacebook`           | `<FontAwesomeIcon icon={['fab', 'facebook']} />` |
+| **Brands** | `faGithub`             | `<FontAwesomeIcon icon={['fab', 'github']} />`   |
+| **Brands** | `faWhatsapp`           | `<FontAwesomeIcon icon={['fab', 'whatsapp']} />` |
+
+
+// === For Font Awesome Library === //
+================================================================
