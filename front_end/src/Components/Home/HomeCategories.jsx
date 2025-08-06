@@ -46,7 +46,7 @@ const HomeCategories = () => {
               />
             ))
         ) : (
-          <></>
+          <h3>لايوجد تصنيفات متاحة حالياً</h3>
         )}
       </Row>
     </Container>

@@ -1,10 +1,10 @@
 import GetData from "../../Hooks/GetData";
 import { get_categories, get_error } from "../Type";
 
-export const GetAllCategories = () => async (dispatch) => {
+export const GetAllCategories = (limit) => async (dispatch) => {
   try {
-    const response = await GetData("/api/v1/categories");
-    console.log(response.data);
+    const response = await GetData(`/api/v1/categories?limit=${limit}`);
+    
     dispatch({
       type: get_categories,
       payload: response,

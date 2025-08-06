@@ -1,7 +1,7 @@
 import ReactPaginate from "react-paginate";
 import { useState, useEffect } from "react";
 
-const Pagination = () => {
+const Pagination = ({ pageCount }) => {
   const [pageRange, setPageRange] = useState(2);
 
   useEffect(() => {
@@ -23,7 +23,9 @@ const Pagination = () => {
     return () => window.removeEventListener("resize", updatePageRange);
   }, []);
 
-  const handlePageClick = () => {};
+  const handlePageClick = (data) => {
+    console.log(data.selected + 1);
+  };
 
   return (
     <ReactPaginate
@@ -32,7 +34,7 @@ const Pagination = () => {
       onPageChange={handlePageClick}
       marginPagesDisplayed={2}
       pageRangeDisplayed={pageRange}
-      pageCount={100}
+      pageCount={pageCount}
       previousLabel="<"
       containerClassName="pagination justify-content-center p-3"
       pageClassName="page-item"
