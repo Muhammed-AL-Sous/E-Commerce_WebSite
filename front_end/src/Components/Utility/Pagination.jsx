@@ -1,7 +1,7 @@
 import ReactPaginate from "react-paginate";
 import { useState, useEffect } from "react";
 
-const Pagination = ({ pageCount }) => {
+const Pagination = ({ pageCount, onPress }) => {
   const [pageRange, setPageRange] = useState(2);
 
   useEffect(() => {
@@ -23,15 +23,11 @@ const Pagination = ({ pageCount }) => {
     return () => window.removeEventListener("resize", updatePageRange);
   }, []);
 
-  const handlePageClick = (data) => {
-    console.log(data.selected + 1);
-  };
-
   return (
     <ReactPaginate
       breakLabel="..."
       nextLabel=">"
-      onPageChange={handlePageClick}
+      onPageChange={(data) => onPress(data.selected + 1)}
       marginPagesDisplayed={2}
       pageRangeDisplayed={pageRange}
       pageCount={pageCount}

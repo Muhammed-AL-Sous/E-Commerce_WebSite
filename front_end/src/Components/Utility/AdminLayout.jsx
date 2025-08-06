@@ -11,6 +11,8 @@ const AdminLayout = () => {
     "/admin/allorders/details",
     "/admin/addbrand",
     "/admin/addproduct",
+    "/admin/addcategory",
+    "/admin/addsubcategory",
   ].includes(location.pathname);
   return (
     <Container>

@@ -5,26 +5,37 @@ import Pagination from "../../Components/Utility/Pagination";
 // React Hooks & Redux
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { GetAllCategories } from "../../Redux/Actions/CategoriesAction";
+import {
+  GetAllCategories,
+  GetAllCategoriesWithPage,
+} from "../../Redux/Actions/CategoriesAction";
 
 const AllCategoriesPage = () => {
   const CategoriesData = useSelector((state) => state.Categories.Categories);
   const dispatch = useDispatch();
   let pageCount = 0;
 
-  if (CategoriesData.data) {
+  // To Get The Number Of Pages
+  if (CategoriesData.paginationResult) {
     pageCount = CategoriesData.paginationResult.numberOfPages;
-    console.log(pageCount);
   }
 
+  // When The Page Loads For The First Time
   useEffect(() => {
     dispatch(GetAllCategories(2));
   }, []);
 
+  // When The Paginations Items Are Pressed
+  const getPage = (page) => {
+    dispatch(GetAllCategoriesWithPage(page));
+  };
+
   return (
     <div style={{ minHeight: "425px" }}>
       <AllCategoriesContainer CategoriesData={CategoriesData} />
-      <Pagination pageCount={pageCount} />
+      {pageCount > 1 ? (
+        <Pagination pageCount={pageCount} onPress={getPage} />
+      ) : null}
     </div>
   );
 };

@@ -1,4 +1,4 @@
-import { get_categories, get_error } from "../Type";
+import { get_categories, get_error, create_category } from "../Type";
 
 const initialState = {
   Categories: [],
@@ -11,6 +11,13 @@ export default function CategoriesReducer(state = initialState, action) {
     case get_categories:
       return {
         ...state,
+        Categories: action.payload,
+        Loading: false,
+        error: null,
+      };
+
+    case create_category:
+      return {
         Categories: action.payload,
         Loading: false,
         error: null,
