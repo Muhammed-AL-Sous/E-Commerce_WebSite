@@ -6,18 +6,18 @@ import Form from "react-bootstrap/Form";
 import ImgUpload from "../../assets/images/avatar.png";
 import add from "../../assets/images/add.png";
 
-// React Hooks
-import { useState } from "react";
+// React Hooks & Redux
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { GetAllCategories } from "../../Redux/Actions/CategoriesAction";
+import { GetAllBrands } from "../../Redux/Actions/BrandsAction";
 
 // External Libraries
 import AdminMultiSelect from "../../Components/Admin/AdminMultiSelect";
 import ImageUploading from "react-images-uploading";
-
-// External Libraries
-import { ToastContainer } from "react-toastify";
-
-// External Libraries
 import notify from "../../Hooks/ToastNotifications";
+import { ToastContainer } from "react-toastify";
+import { CirclePicker } from "react-color";
 
 const AdminAddProductPage = () => {
   const [formInputProduct, setFormInputProduct] = useState({
@@ -30,14 +30,42 @@ const AdminAddProductPage = () => {
     ProductSubcategoriesId: [],
     ProductSelectedSubcategoriesId: [],
     ProductBrandId: "",
-    ProductColors: "",
+    ProductColors: [],
   });
+  const CategoriesData = useSelector((state) => state.Categories.Categories);
+  const BrandsData = useSelector((state) => state.Brands.Brands);
+  const dispatch = useDispatch();
+
+  // React Images Uploading Logic
   const [images, setImages] = useState([]);
   const maxNumber = 4; // أقصى عدد صور
 
+  const [color, setColor] = useState("");
+  const [showHideColorPicker, setShowHideColorPicker] = useState(false);
   const onChange = (imageList) => {
     setImages(imageList);
   };
+
+  useEffect(() => {
+    dispatch(GetAllCategories());
+  }, []);
+  console.log(formInputProduct.ProductColors);
+  useEffect(() => {
+    dispatch(GetAllBrands());
+  }, []);
+
+  function onChangeColor(updatedColor) {
+    setColor(updatedColor.hex); // احفظ اللون المختار
+    // تحقق من عدم تكرار اللون
+    if (!formInputProduct.ProductColors.includes(updatedColor.hex)) {
+      setFormInputProduct({
+        ...formInputProduct,
+        ProductColors: [...formInputProduct.ProductColors, updatedColor.hex],
+      });
+    }
+    setShowHideColorPicker(false); // أخفي الـ Picker بعد الاختيار
+  }
+
   return (
     <div>
       <Row>
@@ -231,6 +259,7 @@ const AdminAddProductPage = () => {
                 controlId="exampleForm.ControlInput1"
               >
                 <Form.Label> تصنيف المنتج</Form.Label>
+
                 <Form.Select
                   aria-label="Default select example"
                   value={formInputProduct.ProductMaincategoryId}
@@ -241,10 +270,14 @@ const AdminAddProductPage = () => {
                     })
                   }
                 >
-                  <option>التصنيف الرئيسي</option>
-                  <option value="1">التصنيف الفرعي الأول</option>
-                  <option value="2">التصنيف الفرعي الثاني</option>
-                  <option value="3">التصنيف الفرعي الثالث</option>
+                  <option value="">إختر تصنيف رئيسي</option>
+                  {CategoriesData.data
+                    ? CategoriesData.data.map((item) => (
+                        <option value={item._id} key={item._id}>
+                          {item.name}
+                        </option>
+                      ))
+                    : null}
                 </Form.Select>
               </Form.Group>
               <AdminMultiSelect />
@@ -255,49 +288,94 @@ const AdminAddProductPage = () => {
                 <Form.Label> الماركة</Form.Label>
                 <Form.Select
                   aria-label="Default select example"
-             
+                  value={formInputProduct.ProductBrandId}
+                  onChange={(e) =>
+                    setFormInputProduct({
+                      ...formInputProduct,
+                      ProductBrandId: e.target.value,
+                    })
+                  }
                 >
-                  <option>ماركة سامسونغ</option>
-                  <option value="1">ماركة آبل</option>
-                  <option value="2">ماركة توشيبا</option>
-                  <option value="3">ماركة لينوفو</option>
+                  <option value="">إختر الماركة </option>
+                  {BrandsData.data
+                    ? BrandsData.data.map((item) => (
+                        <option value={item._id} key={item._id}>
+                          {item.name}
+                        </option>
+                      ))
+                    : null}
                 </Form.Select>
               </Form.Group>
               <div>
                 <h6>الألوان المتاحة للمنتج</h6>
                 <div className="d-flex align-items-center justify-content-between ">
                   <ul className="list-unstyled d-flex gap-3 m-0 flex-wrap">
-                    <li
-                      style={{
-                        width: "25px",
-                        height: "25px",
-                        borderRadius: "50%",
-                        backgroundColor: "red",
-                      }}
-                    ></li>
-                    <li
-                      style={{
-                        width: "25px",
-                        height: "25px",
-                        borderRadius: "50%",
-                        backgroundColor: "green",
-                      }}
-                    ></li>
-                    <li
-                      style={{
-                        width: "25px",
-                        height: "25px",
-                        borderRadius: "50%",
-                        backgroundColor: "blue",
-                      }}
-                    ></li>
+                    {formInputProduct.ProductColors.map((clr, i) => (
+                      <li
+                        key={i}
+                        style={{
+                          width: "25px",
+                          height: "25px",
+                          borderRadius: "50%",
+                          backgroundColor: clr,
+                          border: "1px solid #ccc",
+                          cursor: "pointer",
+                        }}
+                        title="اضغط لحذف اللون"
+                        onClick={() => {
+                          // عند الضغط على اللون، يتم حذفه
+                          setFormInputProduct({
+                            ...formInputProduct,
+                            ProductColors:
+                              formInputProduct.ProductColors.filter(
+                                (c) => c !== clr
+                              ),
+                          });
+                        }}
+                      ></li>
+                    ))}
                   </ul>
                   <div>
-                    <img src={add} alt="add-color" width="30px" height="30px" />
+                    <img
+                      src={add}
+                      alt="add-color"
+                      width="30px"
+                      height="30px"
+                      style={{ cursor: "pointer" }}
+                      onClick={() =>
+                        setShowHideColorPicker(!showHideColorPicker)
+                      }
+                    />
                   </div>
                 </div>
               </div>
             </Form>
+          </div>
+        </Col>
+      </Row>
+      <Row className="justify-content-center my-5">
+        <Col xs="12" md="8">
+          <div className="d-flex justify-content-end">
+            {showHideColorPicker ? (
+              <CirclePicker
+                colors={[
+                  "#e74c3c",
+                  "#8e44ad",
+                  "#3498db",
+                  "#27ae60",
+                  "#f1c40f",
+                  "#e67e22",
+                  "#2c3e50",
+                  "#ff0000",
+                  "#008000",
+                  "#000088",
+                  "#008088",
+                  "#000000",
+                ]}
+                color={color}
+                onChange={onChangeColor}
+              />
+            ) : null}
           </div>
         </Col>
       </Row>
