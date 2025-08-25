@@ -13,11 +13,13 @@ import { GetAllCategories } from "../../Redux/Actions/CategoriesAction";
 import { GetAllBrands } from "../../Redux/Actions/BrandsAction";
 
 // External Libraries
-import AdminMultiSelect from "../../Components/Admin/AdminMultiSelect";
+import Select from "react-select";
+import makeAnimated from "react-select/animated";
 import ImageUploading from "react-images-uploading";
 import notify from "../../Hooks/ToastNotifications";
 import { ToastContainer } from "react-toastify";
 import { CirclePicker } from "react-color";
+import { GetSubCategory } from "../../Redux/Actions/SubCategoryAction";
 
 const AdminAddProductPage = () => {
   const [formInputProduct, setFormInputProduct] = useState({
@@ -32,16 +34,27 @@ const AdminAddProductPage = () => {
     ProductBrandId: "",
     ProductColors: [],
   });
+
+  // Selected Options
+  const [selectedOptions, setSelectedOptions] = useState([]);
+  const [options, setOptions] = useState([]);
+  const animatedComponents = makeAnimated();
+
+  // Redux Data
   const CategoriesData = useSelector((state) => state.Categories.Categories);
   const BrandsData = useSelector((state) => state.Brands.Brands);
+  const SubCategoriesData = useSelector(
+    (state) => state.SubCategories.Sub_Categories
+  );
   const dispatch = useDispatch();
+
+  // Circle Color Picker
+  const [showHideColorPicker, setShowHideColorPicker] = useState(false);
 
   // React Images Uploading Logic
   const [images, setImages] = useState([]);
   const maxNumber = 4; // أقصى عدد صور
 
-  const [color, setColor] = useState("");
-  const [showHideColorPicker, setShowHideColorPicker] = useState(false);
   const onChange = (imageList) => {
     setImages(imageList);
   };
@@ -49,21 +62,42 @@ const AdminAddProductPage = () => {
   useEffect(() => {
     dispatch(GetAllCategories());
   }, []);
-  console.log(formInputProduct.ProductColors);
+
   useEffect(() => {
     dispatch(GetAllBrands());
   }, []);
 
+  const onChangeSelectMainCategory = (e) => {
+    setFormInputProduct({
+      ...formInputProduct,
+      ProductMaincategoryId: e.target.value,
+    });
+
+    if (e.target.value !== "") {
+      dispatch(GetSubCategory(e.target.value));
+    }
+  };
+
+  // Formatted Options For React Select Library
+  useEffect(() => {
+    if (SubCategoriesData?.data) {
+      const formattedOptions = SubCategoriesData.data.map((item) => ({
+        value: item._id,
+        label: item.name,
+      }));
+      setOptions(formattedOptions);
+    }
+  }, [SubCategoriesData]);
+
+  // Circle Color Picker On Change Function
   function onChangeColor(updatedColor) {
-    setColor(updatedColor.hex); // احفظ اللون المختار
-    // تحقق من عدم تكرار اللون
     if (!formInputProduct.ProductColors.includes(updatedColor.hex)) {
       setFormInputProduct({
         ...formInputProduct,
         ProductColors: [...formInputProduct.ProductColors, updatedColor.hex],
       });
     }
-    setShowHideColorPicker(false); // أخفي الـ Picker بعد الاختيار
+    setShowHideColorPicker(false);
   }
 
   return (
@@ -164,7 +198,7 @@ const AdminAddProductPage = () => {
               >
                 <Form.Label>اسم المنتج</Form.Label>
                 <Form.Control
-                  type="email"
+                  type="text"
                   placeholder="أدخل اسم المنتج ..."
                   style={{ fontFamily: "sans-serif" }}
                   value={formInputProduct.ProductName}
@@ -263,12 +297,7 @@ const AdminAddProductPage = () => {
                 <Form.Select
                   aria-label="Default select example"
                   value={formInputProduct.ProductMaincategoryId}
-                  onChange={(e) =>
-                    setFormInputProduct({
-                      ...formInputProduct,
-                      ProductMaincategoryId: e.target.value,
-                    })
-                  }
+                  onChange={onChangeSelectMainCategory}
                 >
                   <option value="">إختر تصنيف رئيسي</option>
                   {CategoriesData.data
@@ -280,7 +309,34 @@ const AdminAddProductPage = () => {
                     : null}
                 </Form.Select>
               </Form.Group>
-              <AdminMultiSelect />
+              <div className="mb-3" style={{ zIndex: "4" }}>
+                <Select
+                  closeMenuOnSelect={false} // يسمح بتحديد أكثر من عنصر بدون غلق القائمة
+                  components={animatedComponents} // تفعيل الأنيميشن من المكتبة نفسها
+                  isMulti // لتفعيل اختيار متعدد
+                  options={options}
+                  value={selectedOptions}
+                  onChange={(selected) => {
+                    setSelectedOptions(selected);
+                    setFormInputProduct({
+                      ...formInputProduct,
+                      ProductSelectedSubcategoriesId: selected.map(
+                        (s) => s.value
+                      ),
+                    });
+                  }}
+                  placeholder="التصنيف الفرعي"
+                  styles={{
+                    multiValueRemove: (base, state) => ({
+                      ...base,
+                      color: state.isFocused ? "white" : "red",
+                      backgroundColor: state.isFocused ? "red" : "transparent",
+                      borderRadius: "4px",
+                      transition: "0.3s",
+                    }),
+                  }}
+                />
+              </div>
               <Form.Group
                 className="mb-3"
                 controlId="exampleForm.ControlInput1"
@@ -310,9 +366,9 @@ const AdminAddProductPage = () => {
                 <h6>الألوان المتاحة للمنتج</h6>
                 <div className="d-flex align-items-center justify-content-between ">
                   <ul className="list-unstyled d-flex gap-3 m-0 flex-wrap">
-                    {formInputProduct.ProductColors.map((clr, i) => (
+                    {formInputProduct.ProductColors.map((clr) => (
                       <li
-                        key={i}
+                        key={clr}
                         style={{
                           width: "25px",
                           height: "25px",
@@ -372,7 +428,6 @@ const AdminAddProductPage = () => {
                   "#008088",
                   "#000000",
                 ]}
-                color={color}
                 onChange={onChangeColor}
               />
             ) : null}
