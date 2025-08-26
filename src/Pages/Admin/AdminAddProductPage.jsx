@@ -20,6 +20,7 @@ import notify from "../../Hooks/ToastNotifications";
 import { ToastContainer } from "react-toastify";
 import { CirclePicker } from "react-color";
 import { GetSubCategory } from "../../Redux/Actions/SubCategoryAction";
+import { CreateProduct } from "../../Redux/Actions/ProductAction";
 
 const AdminAddProductPage = () => {
   const [formInputProduct, setFormInputProduct] = useState({
@@ -99,6 +100,52 @@ const AdminAddProductPage = () => {
     }
     setShowHideColorPicker(false);
   }
+
+  // Add A New Product
+  const handleAddProduct = async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData();
+    formData.append("title", formInputProduct.ProductName);
+    formData.append("description", formInputProduct.ProductDescription);
+    formData.append("quantity", formInputProduct.ProductAvailableQuantity);
+    formData.append("price", formInputProduct.ProductPriceBeforeDiscount);
+    formData.append("brand", formInputProduct.ProductBrandId);
+    if (images.length > 0) {
+      formData.append("imageCover", images[0].file); // مهم تضيف file مش object كامل
+    }
+    formData.append("category", formInputProduct.ProductMaincategoryId);
+    // formData.append("images");
+    // formData.append("description");
+    // formData.append("subcategory");
+
+    const response = await dispatch(CreateProduct(formData));
+
+    if (response.success) {
+      setFormInputProduct({
+        ProductName: "",
+        ProductDescription: "",
+        ProductAvailableQuantity: "",
+        ProductPriceBeforeDiscount: "",
+        ProductPrice: "",
+        ProductMaincategoryId: "",
+        ProductSubcategoriesId: [],
+        ProductSelectedSubcategoriesId: [],
+        ProductBrandId: "",
+        ProductColors: [],
+      });
+
+      // Reset images after product creation
+      setImages([]);
+
+      // Reset selects
+      setSelectedOptions([]); // التصنيفات الفرعية
+
+      notify("تمت إضافة المنتج بنجاح", "success");
+    } else {
+      notify("حدث خطأ أثناء إضافة المنتج", "error");
+    }
+  };
 
   return (
     <div>
@@ -435,8 +482,10 @@ const AdminAddProductPage = () => {
         </Col>
       </Row>
       <Row className="mt-3">
-        <Col xs="12" md="8" className="d-flex justify-content-end">
-          <Button variant="dark">حفظ التعديلات</Button>
+        <Col xs="12" md="10" className="d-flex justify-content-end">
+          <Button variant="dark" onClick={handleAddProduct}>
+            إضافة منتج جديد
+          </Button>
         </Col>
       </Row>
       <ToastContainer />

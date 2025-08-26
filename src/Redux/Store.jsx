@@ -17,7 +17,7 @@ const rootReaducer = combineReducers({
   Categories: CategoriesReducer,
   Brands: BrandsReducer,
   SubCategories: SubCategoriesReducer,
-  // Products: ProductsReducer,
+  Products: ProductsReducer,
 });
 
 const store = createStore(
