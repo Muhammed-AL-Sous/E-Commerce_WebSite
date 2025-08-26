@@ -1,151 +1,41 @@
 // React BootStrap
-import { Button, Row, Col, Card } from "react-bootstrap";
+import { Button, Row, Col, Card, Spinner } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 
 // Images
 import ImgUpload from "../../assets/images/avatar.png";
 import add from "../../assets/images/add.png";
 
-// React Hooks & Redux
-import { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { GetAllCategories } from "../../Redux/Actions/CategoriesAction";
-import { GetAllBrands } from "../../Redux/Actions/BrandsAction";
-
 // External Libraries
 import Select from "react-select";
-import makeAnimated from "react-select/animated";
 import ImageUploading from "react-images-uploading";
 import notify from "../../Hooks/ToastNotifications";
 import { ToastContainer } from "react-toastify";
 import { CirclePicker } from "react-color";
-import { GetSubCategory } from "../../Redux/Actions/SubCategoryAction";
-import { CreateProduct } from "../../Redux/Actions/ProductAction";
+
+// Add Product Hook
+import AddProductHook from "../../Hooks/Products/AddProductHook";
 
 const AdminAddProductPage = () => {
-  const [formInputProduct, setFormInputProduct] = useState({
-    ProductName: "",
-    ProductDescription: "",
-    ProductAvailableQuantity: "",
-    ProductPriceBeforeDiscount: "",
-    ProductPrice: "",
-    ProductMaincategoryId: "",
-    ProductSubcategoriesId: [],
-    ProductSelectedSubcategoriesId: [],
-    ProductBrandId: "",
-    ProductColors: [],
-  });
-
-  // Selected Options
-  const [selectedOptions, setSelectedOptions] = useState([]);
-  const [options, setOptions] = useState([]);
-  const animatedComponents = makeAnimated();
-
-  // Redux Data
-  const CategoriesData = useSelector((state) => state.Categories.Categories);
-  const BrandsData = useSelector((state) => state.Brands.Brands);
-  const SubCategoriesData = useSelector(
-    (state) => state.SubCategories.Sub_Categories
-  );
-  const dispatch = useDispatch();
-
-  // Circle Color Picker
-  const [showHideColorPicker, setShowHideColorPicker] = useState(false);
-
-  // React Images Uploading Logic
-  const [images, setImages] = useState([]);
-  const maxNumber = 4; // أقصى عدد صور
-
-  const onChange = (imageList) => {
-    setImages(imageList);
-  };
-
-  useEffect(() => {
-    dispatch(GetAllCategories());
-  }, []);
-
-  useEffect(() => {
-    dispatch(GetAllBrands());
-  }, []);
-
-  const onChangeSelectMainCategory = (e) => {
-    setFormInputProduct({
-      ...formInputProduct,
-      ProductMaincategoryId: e.target.value,
-    });
-
-    if (e.target.value !== "") {
-      dispatch(GetSubCategory(e.target.value));
-    }
-  };
-
-  // Formatted Options For React Select Library
-  useEffect(() => {
-    if (SubCategoriesData?.data) {
-      const formattedOptions = SubCategoriesData.data.map((item) => ({
-        value: item._id,
-        label: item.name,
-      }));
-      setOptions(formattedOptions);
-    }
-  }, [SubCategoriesData]);
-
-  // Circle Color Picker On Change Function
-  function onChangeColor(updatedColor) {
-    if (!formInputProduct.ProductColors.includes(updatedColor.hex)) {
-      setFormInputProduct({
-        ...formInputProduct,
-        ProductColors: [...formInputProduct.ProductColors, updatedColor.hex],
-      });
-    }
-    setShowHideColorPicker(false);
-  }
-
-  // Add A New Product
-  const handleAddProduct = async (e) => {
-    e.preventDefault();
-
-    const formData = new FormData();
-    formData.append("title", formInputProduct.ProductName);
-    formData.append("description", formInputProduct.ProductDescription);
-    formData.append("quantity", formInputProduct.ProductAvailableQuantity);
-    formData.append("price", formInputProduct.ProductPriceBeforeDiscount);
-    formData.append("brand", formInputProduct.ProductBrandId);
-    if (images.length > 0) {
-      formData.append("imageCover", images[0].file); // مهم تضيف file مش object كامل
-    }
-    formData.append("category", formInputProduct.ProductMaincategoryId);
-    // formData.append("images");
-    // formData.append("description");
-    // formData.append("subcategory");
-
-    const response = await dispatch(CreateProduct(formData));
-
-    if (response.success) {
-      setFormInputProduct({
-        ProductName: "",
-        ProductDescription: "",
-        ProductAvailableQuantity: "",
-        ProductPriceBeforeDiscount: "",
-        ProductPrice: "",
-        ProductMaincategoryId: "",
-        ProductSubcategoriesId: [],
-        ProductSelectedSubcategoriesId: [],
-        ProductBrandId: "",
-        ProductColors: [],
-      });
-
-      // Reset images after product creation
-      setImages([]);
-
-      // Reset selects
-      setSelectedOptions([]); // التصنيفات الفرعية
-
-      notify("تمت إضافة المنتج بنجاح", "success");
-    } else {
-      notify("حدث خطأ أثناء إضافة المنتج", "error");
-    }
-  };
+  const [
+    selectedOptions,
+    options,
+    animatedComponents,
+    loading,
+    showHideColorPicker,
+    maxNumber,
+    onChange,
+    onChangeSelectMainCategory,
+    onChangeColor,
+    handleAddProduct,
+    images,
+    formInputProduct,
+    setFormInputProduct,
+    CategoriesData,
+    setSelectedOptions,
+    BrandsData,
+    setShowHideColorPicker,
+  ] = AddProductHook();
 
   return (
     <div>
@@ -481,9 +371,23 @@ const AdminAddProductPage = () => {
           </div>
         </Col>
       </Row>
-      <Row className="mt-3">
-        <Col xs="12" md="10" className="d-flex justify-content-end">
-          <Button variant="dark" onClick={handleAddProduct}>
+      <Row>
+        <Col
+          xs="12"
+          md="10"
+          className="d-flex justify-content-between align-items-center"
+        >
+          {loading ? (
+            <Spinner
+              animation="border"
+              className="d-flex justify-content-start"
+            />
+          ) : null}
+          <Button
+            variant="dark"
+            style={{ marginRight: "auto" }}
+            onClick={handleAddProduct}
+          >
             إضافة منتج جديد
           </Button>
         </Col>

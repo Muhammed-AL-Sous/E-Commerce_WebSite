@@ -20,17 +20,28 @@ export const CreateProduct = (formData) => async (dispatch) => {
       data: response.data,
     };
   } catch (error) {
+    const backendErrors = error.response?.data?.errors;
+
+    let errorMessage = "حدث خطأ أثناء إضافة المنتج"; // رسالة افتراضية
+
+    if (Array.isArray(backendErrors) && backendErrors.length > 0) {
+      // أول خطأ فقط مع اسم الحقل
+      const firstError = backendErrors[0];
+      errorMessage = `${firstError.param} : ${firstError.msg}`;
+    } else if (error.response?.data?.message) {
+      errorMessage = error.response.data.message;
+    }
+
     dispatch({
       type: get_error,
-      payload: error.response?.data?.message || "حدث خطأ أثناء إضافة المنتج",
+      payload: errorMessage,
     });
 
-    // فشل
     return {
       success: false,
       status: error.response?.status || 500,
-      data: error.response?.data || {},
-      message: error.response?.data?.message || "حدث خطأ أثناء إضافة المنتج",
+      data: backendErrors || {},
+      message: errorMessage, // ← أول خطأ فقط
     };
   }
 };
