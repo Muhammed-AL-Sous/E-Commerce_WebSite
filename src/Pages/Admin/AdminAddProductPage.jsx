@@ -210,10 +210,10 @@ const AdminAddProductPage = () => {
                 className="mb-3"
                 controlId="exampleForm.ControlInput1"
               >
-                <Form.Label> سعر المنتج</Form.Label>
+                <Form.Label> سعر المنتج بعد الخصم</Form.Label>
                 <Form.Control
                   type="number"
-                  placeholder="أدخل سعر المنتج .."
+                  placeholder="أدخل سعر المنتج بعد الخصم ..."
                   style={{ fontFamily: "sans-serif" }}
                   value={formInputProduct.ProductPrice}
                   onChange={(e) =>

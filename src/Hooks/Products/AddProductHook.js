@@ -71,8 +71,8 @@ const AddProductHook = () => {
 
   // Formatted Options For React Select Library
   useEffect(() => {
-    if (SubCategoriesData?.data) {
-      const formattedOptions = SubCategoriesData.data.map((item) => ({
+    if (Array.isArray(SubCategoriesData)) {
+      const formattedOptions = SubCategoriesData.map((item) => ({
         value: item._id,
         label: item.name,
       }));
@@ -102,6 +102,14 @@ const AddProductHook = () => {
     formData.append("price", formInputProduct.ProductPriceBeforeDiscount);
     formData.append("brand", formInputProduct.ProductBrandId);
     formData.append("category", formInputProduct.ProductMaincategoryId);
+
+    if (
+      formInputProduct.ProductPriceBeforeDiscount <
+      formInputProduct.ProductPrice
+    ) {
+      notify("السعر بعد الخصم يجب أن يكون أقل من السعر قبل الخصم ", "warn");
+      return;
+    }
 
     // Add Image Cover
     if (images.length > 0) {

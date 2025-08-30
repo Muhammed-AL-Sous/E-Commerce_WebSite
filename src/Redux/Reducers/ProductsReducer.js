@@ -2,6 +2,7 @@ import { get_products, get_error, create_product } from "../Type";
 
 const initialState = {
   Products: [],
+  allProducts: [],
   error: null,
   Loading: true,
 };
@@ -11,7 +12,7 @@ export default function ProductsReducer(state = initialState, action) {
     case get_products:
       return {
         ...state,
-        Products: action.payload,
+        allProducts: action.payload,
         Loading: false,
         error: null,
       };

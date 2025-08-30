@@ -1,12 +1,15 @@
+// External Library
 import "react-image-gallery/styles/css/image-gallery.css";
 import ImageGallery from "react-image-gallery";
+
 import mobile from "../../assets/images/mobile.png";
 import mobile_01 from "../../assets/images/mobile1.png";
 import mobile_02 from "../../assets/images/mobile2.png";
+
 import LeftButton from "./LeftButton";
 import RightButton from "./RightButton";
 
-const ProductGallery = () => {
+const ProductGallery = ({ id }) => {
   const images = [
     {
       original: `${mobile}`,
@@ -20,7 +23,10 @@ const ProductGallery = () => {
   ];
 
   return (
-    <div className="shadow p-3 rounded-4 mb-4" style={{backgroundColor:"#f6f6f6"}}>
+    <div
+      className="shadow p-3 rounded-4 mb-4"
+      style={{ backgroundColor: "#f6f6f6" }}
+    >
       <ImageGallery
         items={images}
         defaultImage={mobile}

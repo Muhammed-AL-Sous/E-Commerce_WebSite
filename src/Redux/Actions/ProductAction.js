@@ -45,3 +45,20 @@ export const CreateProduct = (formData) => async (dispatch) => {
     };
   }
 };
+
+// Get All Products
+export const GetAllProducts = () => async (dispatch) => {
+  try {
+    const response = await GetData(`/api/v1/products`);
+
+    dispatch({
+      type: get_products,
+      payload: response,
+    });
+  } catch (error) {
+    dispatch({
+      type: get_error,
+      payload: error.response?.data?.message || error.message,
+    });
+  }
+};

@@ -1,6 +1,4 @@
-import { Button } from "react-bootstrap";
-
-const ProductDescription = () => {
+const ProductDescription = ({ id }) => {
   return (
     <div
       className="shadow p-4 rounded-4"
