@@ -1,7 +1,13 @@
-import { get_categories, get_error, create_category } from "../Type";
+import {
+  get_categories,
+  get_specific_category,
+  get_error,
+  create_category,
+} from "../Type";
 
 const initialState = {
   Categories: [],
+  Specific_Category: [],
   error: null,
   Loading: true,
 };
@@ -12,6 +18,13 @@ export default function CategoriesReducer(state = initialState, action) {
       return {
         ...state,
         Categories: action.payload,
+        Loading: false,
+        error: null,
+      };
+
+    case get_specific_category:
+      return {
+        Specific_Category: action.payload,
         Loading: false,
         error: null,
       };

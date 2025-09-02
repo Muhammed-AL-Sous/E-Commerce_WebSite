@@ -1,11 +1,18 @@
-const ProductDescription = ({ id }) => {
+import { useParams } from "react-router-dom";
+import useViewProductDetailsHook from "../../Hooks/Products/useViewProductDetailsHook";
+
+const ProductDescription = () => {
+  const { id } = useParams();
+  const { categoryName } = useViewProductDetailsHook(id);
+  console.log(categoryName);
+  
   return (
     <div
       className="shadow p-4 rounded-4"
       style={{ backgroundColor: "#f6f6f6" }}
     >
       <div className="mb-4">
-        <h4 className="text-muted fw-bolder">الإلكترونيات :</h4>
+        <h4 className="text-muted fw-bolder">{categoryName} :</h4>
         <p className="text-secondary fw-semibold mb-1">
           ايفون 16 برو ماكس بذاكرة داخلية مقدارها 128 جيجا بايت و يدعم خاصية ال
           4G LTE

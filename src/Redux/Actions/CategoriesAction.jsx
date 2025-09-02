@@ -1,6 +1,11 @@
 import GetData from "../../Hooks/GetData";
 import { InsertDataWithImage } from "../../Hooks/InsertData";
-import { get_categories, get_error, create_category } from "../Type";
+import {
+  get_categories,
+  get_specific_category,
+  get_error,
+  create_category,
+} from "../Type";
 
 // Get All Categories
 export const GetAllCategories = (limit) => async (dispatch) => {
@@ -26,6 +31,23 @@ export const GetAllCategoriesWithPage = (page) => async (dispatch) => {
 
     dispatch({
       type: get_categories,
+      payload: response,
+    });
+  } catch (error) {
+    dispatch({
+      type: get_error,
+      payload: error.response?.data?.message || error.message,
+    });
+  }
+};
+
+// Get specific Category
+export const GetSpecificCategory = (id) => async (dispatch) => {
+  try {
+    const response = await GetData(`/api/v1/categories/${id}`);
+
+    dispatch({
+      type: get_specific_category,
       payload: response,
     });
   } catch (error) {

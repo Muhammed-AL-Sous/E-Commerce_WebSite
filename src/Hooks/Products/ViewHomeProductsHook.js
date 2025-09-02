@@ -1,6 +1,6 @@
 // React Hooks & Redux
 import { useDispatch, useSelector } from "react-redux";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { GetAllProducts } from "../../Redux/Actions/ProductAction";
 
 const ViewHomeProductsHook = () => {
@@ -13,7 +13,7 @@ const ViewHomeProductsHook = () => {
 
   let items = [];
 
-  if (ProductsData.data) {
+  if (ProductsData && ProductsData.data) {
     items = ProductsData.data.slice(0, 4);
   } else {
     items = [];

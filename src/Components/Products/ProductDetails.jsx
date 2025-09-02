@@ -2,14 +2,14 @@ import { Col, Row } from "react-bootstrap";
 import ProductGallery from "./ProductGallery";
 import ProductDescription from "./ProductDescription";
 
-const ProductDetails = ({ id }) => {
+const ProductDetails = () => {
   return (
     <Row className="my-3">
       <Col xs="12" lg="4">
-        <ProductGallery id={id} />
+        <ProductGallery />
       </Col>
       <Col xs="12" lg="8">
-        <ProductDescription id={id} />
+        <ProductDescription />
       </Col>
     </Row>
   );

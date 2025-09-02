@@ -1,26 +1,14 @@
-// External Library
 import "react-image-gallery/styles/css/image-gallery.css";
 import ImageGallery from "react-image-gallery";
-
-import mobile from "../../assets/images/mobile.png";
-import mobile_01 from "../../assets/images/mobile1.png";
-import mobile_02 from "../../assets/images/mobile2.png";
-
 import LeftButton from "./LeftButton";
 import RightButton from "./RightButton";
 
-const ProductGallery = ({ id }) => {
-  const images = [
-    {
-      original: `${mobile}`,
-    },
-    {
-      original: `${mobile_01}`,
-    },
-    {
-      original: `${mobile_02}`,
-    },
-  ];
+import { useParams } from "react-router-dom";
+import useViewProductDetailsHook from "../../Hooks/Products/useViewProductDetailsHook";
+
+const ProductGallery = () => {
+  const { id } = useParams();
+  const { images } = useViewProductDetailsHook(id);
 
   return (
     <div
@@ -29,7 +17,6 @@ const ProductGallery = ({ id }) => {
     >
       <ImageGallery
         items={images}
-        defaultImage={mobile}
         showFullscreenButton={false}
         showPlayButton={false}
         isRTL={true}
