@@ -1,9 +1,13 @@
 import { useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { GetSpecificProduct } from "../../Redux/Actions/ProductAction";
+import {
+  GetSimilarProducts,
+  GetSpecificProduct,
+} from "../../Redux/Actions/ProductAction";
 import { GetSpecificCategory } from "../../Redux/Actions/CategoriesAction";
 import mobile from "../../assets/images/mobile.png";
 import { createSelector } from "reselect";
+import { GetSpecificBrand } from "../../Redux/Actions/BrandsAction";
 
 // Memoized selectors
 const selectProductData = createSelector(
@@ -16,10 +20,22 @@ const selectCategoryData = createSelector(
   (sc) => sc?.data || {}
 );
 
+const selectBrandData = createSelector(
+  (state) => state.Brands.Specific_Brand,
+  (sb) => sb?.data || {}
+);
+
+const selectSimilarProductsData = createSelector(
+  (state) => state.Products.similar_products,
+  (sm) => sm?.data || []
+);
+
 const useViewProductDetailsHook = (id) => {
   const dispatch = useDispatch();
   const product = useSelector(selectProductData);
   const category = useSelector(selectCategoryData);
+  const brand = useSelector(selectBrandData);
+  const similarProducts = useSelector(selectSimilarProductsData);
 
   // Fetch product
   useEffect(() => {
@@ -30,6 +46,18 @@ const useViewProductDetailsHook = (id) => {
   useEffect(() => {
     if (product?.category) dispatch(GetSpecificCategory(product.category));
   }, [product?.category, dispatch]);
+
+  // Fetch brand when product.brand changes
+  useEffect(() => {
+    if (product?.brand) dispatch(GetSpecificBrand(product.brand));
+  }, [product?.brand, dispatch]);
+
+  // Fetch similar Products When Product or ID Changes
+  useEffect(() => {
+    if (id && product?.category) {
+      dispatch(GetSimilarProducts(product.category));
+    }
+  }, [id, product?.category, dispatch]);
 
   // Prepare images with useMemo to avoid new reference each render
   const images = useMemo(() => {
@@ -45,7 +73,17 @@ const useViewProductDetailsHook = (id) => {
     [category]
   );
 
-  return { product, images, category, categoryName };
+  // Example: derived data using useMemo
+  const brandName = useMemo(() => brand?.name || "بدون ماركة", [brand]);
+
+  return {
+    product,
+    images,
+    category,
+    categoryName,
+    brandName,
+    similarProducts,
+  };
 };
 
 export default useViewProductDetailsHook;

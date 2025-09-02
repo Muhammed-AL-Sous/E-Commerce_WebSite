@@ -3,12 +3,14 @@ import {
   get_error,
   create_product,
   get_specific_product,
+  get_similar_products,
 } from "../Type";
 
 const initialState = {
   Products: [],
   allProducts: [],
   specific_product: [],
+  similar_products: [],
   error: null,
   Loading: true,
 };
@@ -26,6 +28,14 @@ export default function ProductsReducer(state = initialState, action) {
     case get_specific_product:
       return {
         specific_product: action.payload,
+        Loading: false,
+        error: null,
+      };
+
+    case get_similar_products:
+      return {
+        ...state,
+        similar_products: action.payload,
         Loading: false,
         error: null,
       };

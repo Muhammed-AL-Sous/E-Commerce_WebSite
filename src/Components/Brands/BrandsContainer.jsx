@@ -8,19 +8,28 @@ import BrandCard from "./BrandCard";
 
 // Home Brands Hook
 import HomeBrandsHook from "../../Hooks/Brands/HomeBrandsHook";
+import { useMemo } from "react";
 
 const BrandsContainer = ({ title, btnTitle, path }) => {
   const [BrandsData, BrandsLoader] = HomeBrandsHook();
+
+  const firstFiveBrands = useMemo(() => {
+    if (BrandsData && BrandsData.data) {
+      return BrandsData.data.slice(0, 5);
+    }
+    return [];
+  }, [BrandsData]);
+
   return (
     <Container>
       <SubTitle title={title} btnTitle={btnTitle} path={path} />
       <Row className="my-4 justify-content-center">
         {BrandsLoader ? (
           <Spinner animation="border" />
-        ) : BrandsData.data.length > 0 ? (
-          BrandsData.data
-            .slice(0, 5)
-            .map((item) => <BrandCard key={item._id} img={item.image} />)
+        ) : firstFiveBrands.length > 0 ? (
+          firstFiveBrands.map((item) => (
+            <BrandCard key={item._id} img={item.image} />
+          ))
         ) : (
           <h3>لا يوجد ماركات متاحة حالياً</h3>
         )}

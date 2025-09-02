@@ -7,7 +7,7 @@ const ProductsContainer = ({ title, btnTitle, path, ProductsData }) => {
     <Container>
       <SubTitle title={title} btnTitle={btnTitle} path={path} />
       <Row className="d-flex justify-content-center">
-        {ProductsData ? (
+        {ProductsData && ProductsData.length > 0 ? (
           ProductsData.map((item) => <ProductCard item={item} key={item._id} />)
         ) : (
           <h3>لا يوجد منتجات متاحة حالياً</h3>

@@ -1,6 +1,11 @@
 import GetData from "../../Hooks/GetData";
 import { InsertDataWithImage } from "../../Hooks/InsertData";
-import { get_Brands, create_Brand, get_error } from "../Type";
+import {
+  get_Brands,
+  create_Brand,
+  get_specific_brand,
+  get_error,
+} from "../Type";
 
 // Get All Brands
 export const GetAllBrands = (limit) => async (dispatch) => {
@@ -26,6 +31,23 @@ export const GetAllBrandsWithPage = (page) => async (dispatch) => {
 
     dispatch({
       type: get_Brands,
+      payload: response,
+    });
+  } catch (error) {
+    dispatch({
+      type: get_error,
+      payload: error.response?.data?.message || error.message,
+    });
+  }
+};
+
+// Get Specific Brand
+export const GetSpecificBrand = (id) => async (dispatch) => {
+  try {
+    const response = await GetData(`/api/v1/brands/${id}`);
+
+    dispatch({
+      type: get_specific_brand,
       payload: response,
     });
   } catch (error) {

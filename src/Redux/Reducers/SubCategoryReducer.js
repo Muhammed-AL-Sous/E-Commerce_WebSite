@@ -11,7 +11,7 @@ export default function SubCategoriesReducer(state = initialState, action) {
     case get_sub_categories:
       return {
         ...state,
-        Sub_Categories: action.payload,
+        Sub_Categories: action.payload || [], // array فقط
         Loading: false,
         error: null,
       };
@@ -19,7 +19,7 @@ export default function SubCategoriesReducer(state = initialState, action) {
     case create_sub_category:
       return {
         ...state,
-        Sub_Categories: action.payload,
+        Sub_Categories: [...state.Sub_Categories, action.payload.data], // ✅ ضيف الجديد
         Loading: false,
         error: null,
       };

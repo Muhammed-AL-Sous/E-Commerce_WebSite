@@ -1,7 +1,13 @@
-import { get_Brands, create_Brand, get_error } from "../Type";
+import {
+  get_Brands,
+  create_Brand,
+  get_specific_brand,
+  get_error,
+} from "../Type";
 
 const initialState = {
   Brands: [],
+  Specific_Brand: [],
   error: null,
   Loading: true,
 };
@@ -12,6 +18,13 @@ export default function BrandsReducer(state = initialState, action) {
       return {
         ...state,
         Brands: action.payload,
+        Loading: false,
+        error: null,
+      };
+
+    case get_specific_brand:
+      return {
+        Specific_Brand: action.payload,
         Loading: false,
         error: null,
       };

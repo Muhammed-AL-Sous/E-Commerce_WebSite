@@ -42,28 +42,13 @@ export const GetSubCategory = (id) => async (dispatch) => {
 
     dispatch({
       type: get_sub_categories,
-      payload: response,
-      loading: true,
+      payload: Array.isArray(response.data) ? response.data : [], // تأكد إنها array
     });
 
-    // نجاح
-    return {
-      success: true,
-      status: response.status,
-      data: response.data,
-    };
   } catch (error) {
     dispatch({
       type: get_error,
-      payload: error.response?.data?.message || "حدث خطأ أثناء إضافة التصنيف",
+      payload: error.response?.data?.message || "حدث خطأ أثناء جلب التصنيفات الفرعية",
     });
-
-    // فشل
-    return {
-      success: false,
-      status: error.response?.status || 500,
-      data: error.response?.data || {},
-      message: error.response?.data?.message || "حدث خطأ أثناء إضافة التصنيف",
-    };
   }
 };

@@ -1,6 +1,12 @@
 import GetData from "../../Hooks/GetData";
 import { InsertDataWithImage } from "../../Hooks/InsertData";
-import { get_products, get_error,get_specific_product, create_product } from "../Type";
+import {
+  get_products,
+  get_error,
+  get_specific_product,
+  get_similar_products,
+  create_product,
+} from "../Type";
 
 // Create A New Product With Image
 export const CreateProduct = (formData) => async (dispatch) => {
@@ -70,6 +76,23 @@ export const GetSpecificProduct = (id) => async (dispatch) => {
 
     dispatch({
       type: get_specific_product,
+      payload: response,
+    });
+  } catch (error) {
+    dispatch({
+      type: get_error,
+      payload: error.response?.data?.message || error.message,
+    });
+  }
+};
+
+// Get Similar Products
+export const GetSimilarProducts = (id) => async (dispatch) => {
+  try {
+    const response = await GetData(`/api/v1/products?category=${id}`);
+
+    dispatch({
+      type: get_similar_products,
       payload: response,
     });
   } catch (error) {

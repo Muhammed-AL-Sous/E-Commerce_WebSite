@@ -57,12 +57,14 @@ const AddProductHook = () => {
   useEffect(() => {
     dispatch(GetAllBrands());
   }, []);
+  // console.log("SubCategoriesData after API:", SubCategoriesData);
 
   const onChangeSelectMainCategory = (e) => {
     setFormInputProduct({
       ...formInputProduct,
       ProductMaincategoryId: e.target.value,
     });
+    // console.log("Dispatch GetSubCategory with ID:", e.target.value);
 
     if (e.target.value !== "") {
       dispatch(GetSubCategory(e.target.value));
