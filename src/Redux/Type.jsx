@@ -17,6 +17,7 @@ export const get_products = "Get_Products";
 export const get_specific_product = "Get_Specific_Product";
 export const get_similar_products = "Get_Similar_Products";
 export const create_product = "Create_Product";
+export const delete_product = "Delete_Product";
 
 // Errors
 export const get_error = "Error";

@@ -48,7 +48,7 @@ const AdminAddSubCategoryPage = () => {
             onChange={(e) => setCategoryId(e.target.value)}
           >
             <option value="">إختر تصنيف رئيسي</option>
-            {CategoriesData.data
+            {CategoriesData.data && CategoriesData.data.length > 0
               ? CategoriesData.data.map((item) => (
                   <option value={item._id} key={item._id}>
                     {item.name}

@@ -7,7 +7,7 @@ import { Offcanvas, Button } from "react-bootstrap";
 import { Link, useLocation } from "react-router-dom";
 
 // images
-import product from "../../assets/images/prod1.png";
+// import product from "../../assets/images/prod1.png";
 import fav from "../../assets/images/fav-off.png";
 import rate from "../../assets/images/rate.png";
 

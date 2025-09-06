@@ -4,7 +4,7 @@ import Ratings_And_Reviews from "./Ratings_And_Reviews";
 import RatePost from "./RatePost";
 import Pagination from "../Utility/Pagination";
 
-const RateContainer = () => {
+const RateContainer = ({ pageCount = 0, onPageChange = () => {} }) => {
   return (
     <div
       className="shadow rounded-3 mt-5 p-3"
@@ -39,7 +39,11 @@ const RateContainer = () => {
       <Ratings_And_Reviews />
       <Ratings_And_Reviews />
       <Ratings_And_Reviews />
-      <Pagination />
+
+      {/* Pagination محمي */}
+      {pageCount > 1 && (
+        <Pagination pageCount={pageCount} onPress={onPageChange} />
+      )}
     </div>
   );
 };

@@ -1,13 +1,20 @@
+// React Hooks & Redux
 import { useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
+
+// Redux Action
 import {
   GetSimilarProducts,
   GetSpecificProduct,
 } from "../../Redux/Actions/ProductAction";
 import { GetSpecificCategory } from "../../Redux/Actions/CategoriesAction";
-import mobile from "../../assets/images/mobile.png";
-import { createSelector } from "reselect";
 import { GetSpecificBrand } from "../../Redux/Actions/BrandsAction";
+
+// Default Image
+import mobile from "../../assets/images/mobile.png";
+
+// Reselect
+import { createSelector } from "reselect";
 
 // Memoized selectors
 const selectProductData = createSelector(

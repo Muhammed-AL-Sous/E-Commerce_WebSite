@@ -4,6 +4,7 @@ import {
   create_product,
   get_specific_product,
   get_similar_products,
+  delete_product,
 } from "../Type";
 
 const initialState = {
@@ -11,6 +12,7 @@ const initialState = {
   allProducts: [],
   specific_product: [],
   similar_products: [],
+  delete_product: [],
   error: null,
   Loading: true,
 };
@@ -43,6 +45,14 @@ export default function ProductsReducer(state = initialState, action) {
     case create_product:
       return {
         Products: action.payload,
+        Loading: false,
+        error: null,
+      };
+
+    case delete_product:
+      return {
+        ...state,
+        delete_product: action.payload,
         Loading: false,
         error: null,
       };

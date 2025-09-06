@@ -6,6 +6,7 @@ import {
   get_specific_product,
   get_similar_products,
   create_product,
+  delete_product
 } from "../Type";
 
 // Create A New Product With Image
@@ -93,6 +94,41 @@ export const GetSimilarProducts = (id) => async (dispatch) => {
 
     dispatch({
       type: get_similar_products,
+      payload: response,
+    });
+  } catch (error) {
+    dispatch({
+      type: get_error,
+      payload: error.response?.data?.message || error.message,
+    });
+  }
+};
+
+// Get All Products With Pagination
+export const GetAllProductsWithPage = (page) => async (dispatch) => {
+  try {
+    const response = await GetData(`/api/v1/products?limit=2&page=${page}`);
+
+    dispatch({
+      type: get_products,
+      payload: response,
+    });
+  } catch (error) {
+    dispatch({
+      type: get_error,
+      payload: error.response?.data?.message || error.message,
+    });
+  }
+};
+
+
+// Delete A Product
+export const DeleteProduct = (id) => async (dispatch) => {
+  try {
+    const response = await GetData(`/api/v1/products/${id}`);
+
+    dispatch({
+      type: delete_product,
       payload: response,
     });
   } catch (error) {

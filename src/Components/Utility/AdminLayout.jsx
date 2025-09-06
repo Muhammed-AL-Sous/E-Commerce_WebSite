@@ -1,10 +1,15 @@
 import { Col, Container, Row } from "react-bootstrap";
 import AdminSideBar from "../../Components/Admin/AdminSideBar";
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import Pagination from "./Pagination";
-import { useLocation } from "react-router-dom";
+import useAdminProductManagementHook from "../../Hooks/Admin/useAdminProductManagementHook";
 
 const AdminLayout = () => {
+  const { pageCount: rawPageCount, getPage } = useAdminProductManagementHook();
+
+  // اجعل pageCount عدد صحيح ≥ 1 أو 0 إذا البيانات لم تجهز
+  const pageCount = rawPageCount ? Math.ceil(rawPageCount) : 0;
+
   const location = useLocation();
 
   const hidePagination = [
@@ -13,7 +18,20 @@ const AdminLayout = () => {
     "/admin/addproduct",
     "/admin/addcategory",
     "/admin/addsubcategory",
-  ].includes(location.pathname);
+  ].some((path) => location.pathname.startsWith(path));
+
+  const paginationConfig = [
+    {
+      match: (path) => path.startsWith("/admin/allproducts"),
+      pageCount,
+      onPageChange: getPage,
+    },
+  ];
+
+  const currentConfig = paginationConfig.find((cfg) =>
+    cfg.match(location.pathname)
+  );
+
   return (
     <Container>
       <Row className="py-4">
@@ -28,10 +46,13 @@ const AdminLayout = () => {
         </Col>
       </Row>
 
-      {!hidePagination && (
+      {!hidePagination && currentConfig && currentConfig.pageCount > 1 && (
         <Row>
           <Col xs="12">
-            <Pagination />
+            <Pagination
+              pageCount={currentConfig.pageCount}
+              onPress={currentConfig.onPageChange}
+            />
           </Col>
         </Row>
       )}

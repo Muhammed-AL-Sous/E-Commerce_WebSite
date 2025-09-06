@@ -24,7 +24,7 @@ export const GetAllCategories = (limit) => async (dispatch) => {
   }
 };
 
-// // Get All Categories With Pagination
+// Get All Categories With Pagination
 export const GetAllCategoriesWithPage = (page) => async (dispatch) => {
   try {
     const response = await GetData(`/api/v1/categories?limit=2&page=${page}`);

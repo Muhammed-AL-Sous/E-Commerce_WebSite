@@ -1,10 +1,6 @@
-// React BootStrap
 import { Container } from "react-bootstrap";
-
-// CSS File
 import "../../Styles/ProductDetailsPageStyles.css";
 
-// Components
 import CategoriesHeader from "../../Components/Categories/CategoriesHeader";
 import ProductDetails from "../../Components/Products/ProductDetails";
 import RateContainer from "../../Components/Rate/RateContainer";
@@ -15,14 +11,18 @@ import { useParams } from "react-router-dom";
 const ProductDetailsPage = () => {
   const { id } = useParams();
   const { similarProducts } = useViewProductDetailsHook(id);
+
   return (
     <div style={{ minHeight: "425px" }}>
       <CategoriesHeader />
       <Container>
         <ProductDetails />
-        <RateContainer />
+
+        {/* تمرير pageCount=0 و onPageChange افتراضي لتجنب التحذيرات */}
+        <RateContainer pageCount={0} onPageChange={() => {}} />
+
         <ProductsContainer
-          ProductsData={similarProducts}
+          ProductsData={similarProducts || []}
           title="منتجات قد تعجبك"
         />
       </Container>
