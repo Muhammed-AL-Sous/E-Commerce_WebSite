@@ -29,6 +29,7 @@ export default function ProductsReducer(state = initialState, action) {
 
     case get_specific_product:
       return {
+        ...state,
         specific_product: action.payload,
         Loading: false,
         error: null,

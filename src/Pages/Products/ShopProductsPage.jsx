@@ -12,22 +12,24 @@ import Pagination from "../../Components/Utility/Pagination";
 import ViewSearchProductsHook from "../../Hooks/Products/ViewSearchProductsHook";
 
 const ShopProductsPage = () => {
-  const [item] = ViewSearchProductsHook();
+  const [items, pageCount, getPage] = ViewSearchProductsHook();
 
   return (
     <div style={{ minHeight: "100vh" }}>
       <CategoriesHeader />
       <Container>
-        <SearchCountResult title={`يوجد ${item.length} نتيجة بحث ...`} />
+        <SearchCountResult title={`يوجد ${items.length} نتيجة بحث ...`} />
         <Row className="mt-4">
           <Col xs="0" md="3" lg="2">
             <SideFilter />
           </Col>
           <Col>
-            <ProductsContainer ProductsData={item} title="" btnTitle="" />
+            <ProductsContainer ProductsData={items} title="" btnTitle="" />
           </Col>
         </Row>
-        <Pagination />
+        {pageCount > 1 ? (
+          <Pagination pageCount={pageCount} onPress={getPage} />
+        ) : null}
       </Container>
     </div>
   );

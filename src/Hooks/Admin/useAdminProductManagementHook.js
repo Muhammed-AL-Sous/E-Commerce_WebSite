@@ -13,7 +13,7 @@ const useAdminProductManagementHook = () => {
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
-      await dispatch(GetAllProductsWithPage(1)); // جلب الصفحة الأولى
+      await dispatch(GetAllProductsWithPage(1, 3)); // جلب الصفحة الأولى
       setLoading(false);
     };
     fetchData();
@@ -27,7 +27,7 @@ const useAdminProductManagementHook = () => {
   // عند الضغط على صفحة
   const getPage = async (page) => {
     setLoading(true);
-    await dispatch(GetAllProductsWithPage(page));
+    await dispatch(GetAllProductsWithPage(page, 3));
     setLoading(false);
   };
 

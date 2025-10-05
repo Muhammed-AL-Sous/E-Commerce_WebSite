@@ -74,14 +74,8 @@ const useViewProductDetailsHook = (id) => {
     return [{ original: mobile }];
   }, [product?.images]);
 
-  // Example: derived data using useMemo
-  const categoryName = useMemo(
-    () => category?.name || "بدون تصنيف",
-    [category]
-  );
-
-  // Example: derived data using useMemo
-  const brandName = useMemo(() => brand?.name || "بدون ماركة", [brand]);
+  const categoryName = category?.name || "بدون تصنيف";
+  const brandName = brand?.name || "بدون ماركة";
 
   return {
     product,

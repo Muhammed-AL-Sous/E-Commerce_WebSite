@@ -24,6 +24,7 @@ export default function CategoriesReducer(state = initialState, action) {
 
     case get_specific_category:
       return {
+        ...state,
         Specific_Category: action.payload,
         Loading: false,
         error: null,
@@ -42,6 +43,8 @@ export default function CategoriesReducer(state = initialState, action) {
         ...state,
         error: action.payload,
       };
+
+
 
     default:
       return state;

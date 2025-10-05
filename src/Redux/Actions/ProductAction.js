@@ -1,12 +1,15 @@
+// Hooks
 import GetData from "../../Hooks/GetData";
+import DeleteData from "../../Hooks/DeleteData";
 import { InsertDataWithImage } from "../../Hooks/InsertData";
+
 import {
   get_products,
   get_error,
   get_specific_product,
   get_similar_products,
   create_product,
-  delete_product
+  delete_product,
 } from "../Type";
 
 // Create A New Product With Image
@@ -54,9 +57,9 @@ export const CreateProduct = (formData) => async (dispatch) => {
 };
 
 // Get All Products
-export const GetAllProducts = () => async (dispatch) => {
+export const GetAllProducts = (limit) => async (dispatch) => {
   try {
-    const response = await GetData(`/api/v1/products`);
+    const response = await GetData(`/api/v1/products?limit=${limit}`);
 
     dispatch({
       type: get_products,
@@ -105,9 +108,11 @@ export const GetSimilarProducts = (id) => async (dispatch) => {
 };
 
 // Get All Products With Pagination
-export const GetAllProductsWithPage = (page) => async (dispatch) => {
+export const GetAllProductsWithPage = (page, limit) => async (dispatch) => {
   try {
-    const response = await GetData(`/api/v1/products?limit=2&page=${page}`);
+    const response = await GetData(
+      `/api/v1/products?limit=${limit}&page=${page}`
+    );
 
     dispatch({
       type: get_products,
@@ -121,11 +126,10 @@ export const GetAllProductsWithPage = (page) => async (dispatch) => {
   }
 };
 
-
 // Delete A Product
 export const DeleteProduct = (id) => async (dispatch) => {
   try {
-    const response = await GetData(`/api/v1/products/${id}`);
+    const response = await DeleteData(`/api/v1/products/${id}`);
 
     dispatch({
       type: delete_product,

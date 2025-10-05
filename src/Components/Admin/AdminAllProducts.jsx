@@ -11,7 +11,6 @@ const AdminAllProducts = () => {
         إدارة جميع المنتجات
       </div>
       <Row className="justify-content-start">
-      
         <AdminAllProductsCard products={products || []} loading={loading} />
       </Row>
     </>

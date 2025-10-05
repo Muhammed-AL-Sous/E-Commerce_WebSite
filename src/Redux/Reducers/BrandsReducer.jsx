@@ -24,6 +24,7 @@ export default function BrandsReducer(state = initialState, action) {
 
     case get_specific_brand:
       return {
+        ...state,
         Specific_Brand: action.payload,
         Loading: false,
         error: null,
@@ -42,6 +43,7 @@ export default function BrandsReducer(state = initialState, action) {
         ...state,
         error: action.payload,
       };
+
 
     default:
       return state;
