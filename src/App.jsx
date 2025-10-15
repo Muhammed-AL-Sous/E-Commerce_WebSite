@@ -31,6 +31,7 @@ import UserAddressPage from "./Pages/User/UserAddressPage";
 import UserAddAddressPage from "./Pages/User/UserAddAddressPage";
 import UserEditAddressPage from "./Pages/User/UserEditAddressPage";
 import UserProfilePage from "./Pages/User/UserProfilePage";
+import AdminEditProductPage from "./Pages/Admin/AdminEditProductPage";
 
 export const App = () => {
   const location = useLocation();
@@ -57,6 +58,7 @@ export const App = () => {
           <Route path="addcategory" element={<AdminAddCategoryPage />} />
           <Route path="addsubcategory" element={<AdminAddSubCategoryPage />} />
           <Route path="addproduct" element={<AdminAddProductPage />} />
+          <Route path="editproduct/:id" element={<AdminEditProductPage />} />
 
           {/* Parent Route للطلبات */}
           <Route path="allorders" element={<AdminAllOrdersPage />}>

@@ -92,9 +92,11 @@ const AdminAllProductsCard = ({ products, loading }) => {
                 }}
               >
                 <div className="d-flex justify-content-between mt-3 mb-3 mx-3">
+                  <Link to={`/admin/editproduct/${card._id}`}>
                   <Button variant="warning" className="text-white">
                     تعديل
                   </Button>
+                  </Link>
                   <Button variant="danger" onClick={() => handleShow(card._id)}>
                     حذف
                   </Button>
