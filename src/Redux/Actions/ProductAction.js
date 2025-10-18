@@ -2,6 +2,7 @@
 import GetData from "../../Hooks/GetData";
 import DeleteData from "../../Hooks/DeleteData";
 import { InsertDataWithImage } from "../../Hooks/InsertData";
+import UpdateData from "../../Hooks/UpdateData";
 
 import {
   get_products,
@@ -10,6 +11,7 @@ import {
   get_similar_products,
   create_product,
   delete_product,
+  update_product,
 } from "../Type";
 
 // Create A New Product With Image
@@ -142,3 +144,54 @@ export const DeleteProduct = (id) => async (dispatch) => {
     });
   }
 };
+
+// Update A Product
+export const UpdateProduct =
+  ({ id, formData }) =>
+  async (dispatch) => {
+    try {
+      const response = await UpdateData(`/api/v1/products/${id}`, formData);
+
+      dispatch({
+        type: update_product,
+        payload: response,
+        loading: true,
+      });
+
+      return {
+        success: true,
+        status: response.status,
+        data: response.data,
+      };
+    } catch (error) {
+      const backendErrors = error.response?.data?.errors;
+
+      let errorMessage = "حدث خطأ أثناء تعديل المنتج"; // تعديل الرسالة لتكون أدق
+
+      if (Array.isArray(backendErrors) && backendErrors.length > 0) {
+        const firstError = backendErrors[0];
+        errorMessage = `${firstError.param} : ${firstError.msg}`;
+      } else if (error.response?.data?.message) {
+        errorMessage = error.response.data.message;
+      }
+
+      dispatch({
+        type: get_error,
+        payload: errorMessage,
+      });
+
+      return {
+        success: false,
+        status: error.response?.status || 500,
+        data: backendErrors || {},
+        message: errorMessage,
+      };
+    }
+  };
+
+// ProductAction.js
+export const ClearSpecificProduct = () => ({
+  type: "CLEAR_SPECIFIC_PRODUCT",
+});
+
+

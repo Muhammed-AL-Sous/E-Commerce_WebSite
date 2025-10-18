@@ -44,7 +44,11 @@ export default function CategoriesReducer(state = initialState, action) {
         error: action.payload,
       };
 
-
+    case "CLEAR_SPECIFIC_CATEGORY":
+      return {
+        ...state,
+       Specific_Category: [],
+      };
 
     default:
       return state;

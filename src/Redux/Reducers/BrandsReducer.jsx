@@ -44,6 +44,11 @@ export default function BrandsReducer(state = initialState, action) {
         error: action.payload,
       };
 
+    case "CLEAR_SPECIFIC_BRAND":
+      return {
+        ...state,
+        Specific_Brand: [],
+      };
 
     default:
       return state;

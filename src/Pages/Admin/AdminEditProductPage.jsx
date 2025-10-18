@@ -19,7 +19,7 @@ import EditProductHook from "../../Hooks/Products/EditProductHook";
 
 const AdminEditProductPage = () => {
   const { id } = useParams();
-  
+
   const [
     selectedOptions,
     options,
@@ -30,7 +30,7 @@ const AdminEditProductPage = () => {
     onChange,
     onChangeSelectMainCategory,
     onChangeColor,
-    handleAddProduct,
+    handleEditProduct,
     images,
     formInputProduct,
     setFormInputProduct,
@@ -45,9 +45,7 @@ const AdminEditProductPage = () => {
       <Row>
         <Col xs="12">
           <div>
-            <h2 className="text-success fs-4 fw-semibold mb-3">
-            تعديل المنتج
-            </h2>
+            <h2 className="text-success fs-4 fw-semibold mb-3">تعديل المنتج</h2>
           </div>
           <div>
             <p className="m-0 text-muted fw-semibold">
@@ -389,9 +387,9 @@ const AdminEditProductPage = () => {
           <Button
             variant="success"
             style={{ marginRight: "auto" }}
-            onClick={handleAddProduct}
+            onClick={handleEditProduct}
           >
-          حفظ التعديلات
+            حفظ التعديلات
           </Button>
         </Col>
       </Row>

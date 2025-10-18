@@ -3,26 +3,30 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { GetAllCategories } from "../../Redux/Actions/CategoriesAction";
 import { GetAllBrands } from "../../Redux/Actions/BrandsAction";
-import { GetSpecificProduct } from "../../Redux/Actions/ProductAction";
+import {
+  GetSpecificProduct,
+  UpdateProduct,
+} from "../../Redux/Actions/ProductAction";
 
 // External Libraries
 import makeAnimated from "react-select/animated";
 import notify from "../../Hooks/ToastNotifications";
 import { GetSubCategory } from "../../Redux/Actions/SubCategoryAction";
-import { CreateProduct } from "../../Redux/Actions/ProductAction";
 
 // Reselect
 import { createSelector } from "reselect";
 
 // Memoized selectors
 const selectProductData = createSelector(
-  (state) => state.Products.specific_product, // input selector
-  (sp) => sp?.data || {} // result function
+  (state) => state.Products.specific_product,
+  (sp) => sp?.data || {}
 );
 
 const EditProductHook = (id) => {
+  const dispatch = useDispatch();
   const product = useSelector(selectProductData);
 
+  // States
   const [formInputProduct, setFormInputProduct] = useState({
     ProductName: "",
     ProductDescription: "",
@@ -36,116 +40,82 @@ const EditProductHook = (id) => {
     ProductColors: [],
   });
 
-  // Selected Options
   const [selectedOptions, setSelectedOptions] = useState([]);
   const [options, setOptions] = useState([]);
   const animatedComponents = makeAnimated();
+  const [loading, setLoading] = useState(false);
+  const [showHideColorPicker, setShowHideColorPicker] = useState(false);
+  const [images, setImages] = useState([]);
+  const maxNumber = 4;
 
-  // Redux Data
+  // Redux data
   const CategoriesData = useSelector((state) => state.Categories.Categories);
   const BrandsData = useSelector((state) => state.Brands.Brands);
   const SubCategoriesData = useSelector(
     (state) => state.SubCategories.Sub_Categories
   );
-  const dispatch = useDispatch();
-  const [loading, setLoading] = useState(false);
 
-  // Circle Color Picker
-  const [showHideColorPicker, setShowHideColorPicker] = useState(false);
-
-  // React Images Uploading Logic
-  const [images, setImages] = useState([]);
-  const maxNumber = 4; // أقصى عدد صور
-
+  // Handlers
   const onChange = (imageList) => {
     setImages(imageList);
   };
 
-  // Fetch product
+  const onChangeSelectMainCategory = (e) => {
+    const selectedCategory = e.target.value;
+    setFormInputProduct((prev) => ({
+      ...prev,
+      ProductMaincategoryId: selectedCategory,
+    }));
+    if (selectedCategory) dispatch(GetSubCategory(selectedCategory));
+  };
+
+  const onChangeColor = (updatedColor) => {
+    const hex = updatedColor.hex;
+    if (!formInputProduct.ProductColors.includes(hex)) {
+      setFormInputProduct((prev) => ({
+        ...prev,
+        ProductColors: [...prev.ProductColors, hex],
+      }));
+    }
+    setShowHideColorPicker(false);
+  };
+
+  // Fetch data
   useEffect(() => {
     if (id) dispatch(GetSpecificProduct(id));
   }, [id, dispatch]);
 
   useEffect(() => {
     dispatch(GetAllCategories());
-  }, []);
-
-  useEffect(() => {
     dispatch(GetAllBrands());
-  }, []);
+  }, [dispatch]);
 
+  // When product data arrives
   useEffect(() => {
-    if (product && product.category) {
-      // جلب التصنيفات الفرعية حسب التصنيف الرئيسي للمنتج
-      dispatch(GetSubCategory(product.category));
-    }
-
     if (product && product.title) {
       setFormInputProduct((prev) => ({
         ...prev,
-        ProductName: product.title,
-        ProductDescription: product.description || prev.ProductDescription,
-        ProductAvailableQuantity:
-          product.quantity || prev.ProductAvailableQuantity,
-        ProductPriceBeforeDiscount:
-          product.priceBeforeDiscount || prev.ProductPriceBeforeDiscount,
-        ProductPrice: product.price || prev.ProductPrice,
-        ProductMaincategoryId: product.category || prev.ProductMaincategoryId,
-
+        ProductName: product.title || "",
+        ProductDescription: product.description || "",
+        ProductAvailableQuantity: product.quantity || "",
+        ProductPriceBeforeDiscount: product.priceBeforeDiscount || "",
+        ProductPrice: product.price || "",
+        ProductMaincategoryId: product.category || "",
         ProductSelectedSubcategoriesId: Array.isArray(product.subcategory)
           ? product.subcategory
-          : prev.ProductSelectedSubcategoriesId,
-
-        ProductBrandId: product.brand || prev.ProductBrandId,
-
+          : [],
+        ProductBrandId: product.brand || "",
         ProductColors: Array.isArray(product.availableColors)
           ? product.availableColors
-          : prev.ProductColors,
+          : [],
       }));
+
+      // Fetch subcategories of main category
+      if (product.category) dispatch(GetSubCategory(product.category));
     }
-  }, [product]);
+  }, [product, dispatch]);
 
-  useEffect(() => {
-    if (
-      product &&
-      product.subcategory &&
-      Array.isArray(product.subcategory) &&
-      options.length > 0
-    ) {
-      const selected = options.filter((option) =>
-        product.subcategory.includes(option.value)
-      );
-      setSelectedOptions(selected);
-
-      setFormInputProduct((prev) => ({
-        ...prev,
-        ProductSelectedSubcategoriesId: product.subcategory,
-      }));
-    }
-  }, [product, options]);
-
-  useEffect(() => {
-    if (product && product.images && Array.isArray(product.images)) {
-      const initialImages = product.images.map((imgUrl) => ({
-        data_url: imgUrl,
-        file: null,
-      }));
-      setImages(initialImages);
-    }
-  }, [product]);
-
-  const onChangeSelectMainCategory = (e) => {
-    setFormInputProduct({
-      ...formInputProduct,
-      ProductMaincategoryId: e.target.value,
-    });
-
-    if (e.target.value !== "") {
-      dispatch(GetSubCategory(e.target.value));
-    }
-  };
-
-  // Formatted Options For React Select Library
+  // Format subcategory options
   useEffect(() => {
     if (Array.isArray(SubCategoriesData)) {
       const formattedOptions = SubCategoriesData.map((item) => ({
@@ -156,87 +126,87 @@ const EditProductHook = (id) => {
     }
   }, [SubCategoriesData]);
 
-  // Circle Color Picker On Change Function
-  function onChangeColor(updatedColor) {
-    if (!formInputProduct.ProductColors.includes(updatedColor.hex)) {
-      setFormInputProduct({
-        ...formInputProduct,
-        ProductColors: [...formInputProduct.ProductColors, updatedColor.hex],
-      });
+  // Select subcategories when product has them
+  useEffect(() => {
+    if (product && Array.isArray(product.subcategory) && options.length > 0) {
+      const selected = options.filter((option) =>
+        product.subcategory.includes(option.value)
+      );
+      setSelectedOptions(selected);
     }
-    setShowHideColorPicker(false);
-  }
+  }, [product, options]);
 
-  // Add A New Product
-  const handleAddProduct = async (e) => {
+  // Initialize product images (existing)
+  useEffect(() => {
+    if (Array.isArray(product?.images)) {
+      const initialImages = product.images.map((imgUrl) => ({
+        data_url: imgUrl,
+        file: null, // existing image, no file yet
+      }));
+      setImages(initialImages);
+    }
+  }, [product]);
+
+  // Edit Product Handler
+  const handleEditProduct = async (e) => {
     e.preventDefault();
+
+    if (!id) {
+      notify("لم يتم تحديد المنتج للتعديل", "error");
+      return;
+    }
+
+    if (
+      Number(formInputProduct.ProductPriceBeforeDiscount) <
+      Number(formInputProduct.ProductPrice)
+    ) {
+      notify("السعر بعد الخصم يجب أن يكون أقل من السعر قبل الخصم", "warn");
+      return;
+    }
 
     const formData = new FormData();
     formData.append("title", formInputProduct.ProductName);
     formData.append("description", formInputProduct.ProductDescription);
     formData.append("quantity", formInputProduct.ProductAvailableQuantity);
-    formData.append("price", formInputProduct.ProductPriceBeforeDiscount);
+    formData.append("price", formInputProduct.ProductPrice);
     formData.append("brand", formInputProduct.ProductBrandId);
     formData.append("category", formInputProduct.ProductMaincategoryId);
 
-    if (
-      formInputProduct.ProductPriceBeforeDiscount <
-      formInputProduct.ProductPrice
-    ) {
-      notify("السعر بعد الخصم يجب أن يكون أقل من السعر قبل الخصم ", "warn");
-      return;
+    // Safe check before adding cover image
+    const imageCover = images?.[0]?.file;
+    if (imageCover) {
+      formData.append("imageCover", imageCover);
     }
 
-    // Add Image Cover
-    if (images.length > 0) {
-      formData.append("imageCover", images[0].file);
-    }
-
-    // Add colors array
-    formInputProduct.ProductColors.map((color) =>
+    // Add colors
+    formInputProduct.ProductColors.forEach((color) =>
       formData.append("availableColors", color)
     );
 
-    // Add Product Selected Subcategories Id array
-    formInputProduct.ProductSelectedSubcategoriesId.map((SubcategoriesId) =>
-      formData.append("subcategory", SubcategoriesId)
+    // Add selected subcategories
+    formInputProduct.ProductSelectedSubcategoriesId.forEach((subId) =>
+      formData.append("subcategory", subId)
     );
 
-    // Add Product Selected Images array
-    images.map((img) => formData.append("images", img.file));
+    // Add extra images (newly uploaded only)
+    if (Array.isArray(images) && images.length > 0) {
+      images.forEach((img) => {
+        if (img.file) formData.append("images", img.file);
+      });
+    }
 
     setLoading(true);
 
-    const response = await dispatch(CreateProduct(formData));
+    const response = await dispatch(UpdateProduct({ id, formData }));
 
-    if (response.success) {
-      setFormInputProduct({
-        ProductName: "",
-        ProductDescription: "",
-        ProductAvailableQuantity: "",
-        ProductPriceBeforeDiscount: "",
-        ProductPrice: "",
-        ProductMaincategoryId: "",
-        ProductSubcategoriesId: [],
-        ProductSelectedSubcategoriesId: [],
-        ProductBrandId: "",
-        ProductColors: [],
-      });
-
-      // Reset images after product creation
-      setImages([]);
-
-      // Reset selects
-      setSelectedOptions([]); // التصنيفات الفرعية
-
-      notify("تمت إضافة المنتج بنجاح", "success");
+    if (response?.success) {
+      notify("تم تعديل المنتج بنجاح", "success");
     } else {
-      notify(response.message, "error"); // الرسالة الآن أول خطأ فقط
+      notify(response?.message || "حدث خطأ أثناء التعديل", "error");
     }
+
     setLoading(false);
   };
-
-  function handleEditProduct() {}
 
   return [
     selectedOptions,
@@ -248,7 +218,7 @@ const EditProductHook = (id) => {
     onChange,
     onChangeSelectMainCategory,
     onChangeColor,
-    handleAddProduct,
+    handleEditProduct,
     images,
     formInputProduct,
     setFormInputProduct,

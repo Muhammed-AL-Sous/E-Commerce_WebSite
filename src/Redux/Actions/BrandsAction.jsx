@@ -90,3 +90,7 @@ export const CreateBrand = (formData) => async (dispatch) => {
   }
 };
 
+// BrandsAction.js
+export const ClearSpecificBrand = () => ({
+  type: "CLEAR_SPECIFIC_BRAND",
+});

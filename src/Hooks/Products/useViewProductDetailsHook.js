@@ -6,9 +6,16 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   GetSimilarProducts,
   GetSpecificProduct,
+  ClearSpecificProduct,
 } from "../../Redux/Actions/ProductAction";
-import { GetSpecificCategory } from "../../Redux/Actions/CategoriesAction";
-import { GetSpecificBrand } from "../../Redux/Actions/BrandsAction";
+import {
+  GetSpecificCategory,
+  ClearSpecificCategory,
+} from "../../Redux/Actions/CategoriesAction";
+import {
+  GetSpecificBrand,
+  ClearSpecificBrand,
+} from "../../Redux/Actions/BrandsAction";
 
 // Default Image
 import mobile from "../../assets/images/mobile.png";
@@ -44,29 +51,40 @@ const useViewProductDetailsHook = (id) => {
   const brand = useSelector(selectBrandData);
   const similarProducts = useSelector(selectSimilarProductsData);
 
-  // Fetch product
+  // تنظيف الحالة عند الخروج أو تغيير id
   useEffect(() => {
-    if (id) dispatch(GetSpecificProduct(id));
+    return () => {
+      dispatch(ClearSpecificProduct());
+      dispatch(ClearSpecificCategory());
+      dispatch(ClearSpecificBrand());
+    };
+  }, [dispatch]);
+
+  // جلب المنتج
+  useEffect(() => {
+    if (id) {
+      dispatch(GetSpecificProduct(id));
+    }
   }, [id, dispatch]);
 
-  // Fetch category when product.category changes
+  // جلب التصنيف عند تغيّر category
   useEffect(() => {
     if (product?.category) dispatch(GetSpecificCategory(product.category));
   }, [product?.category, dispatch]);
 
-  // Fetch brand when product.brand changes
+  // جلب الماركة عند تغيّر brand
   useEffect(() => {
     if (product?.brand) dispatch(GetSpecificBrand(product.brand));
   }, [product?.brand, dispatch]);
 
-  // Fetch similar Products When Product or ID Changes
+  // جلب المنتجات المشابهة
   useEffect(() => {
     if (id && product?.category) {
       dispatch(GetSimilarProducts(product.category));
     }
   }, [id, product?.category, dispatch]);
 
-  // Prepare images with useMemo to avoid new reference each render
+  // إعداد الصور
   const images = useMemo(() => {
     if (product?.images?.length) {
       return product.images.map((img) => ({ original: img }));

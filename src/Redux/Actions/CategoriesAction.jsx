@@ -90,3 +90,7 @@ export const CreateCategory = (formData) => async (dispatch) => {
   }
 };
 
+// CategoriesAction.js
+export const ClearSpecificCategory = () => ({
+  type: "CLEAR_SPECIFIC_CATEGORY",
+});
