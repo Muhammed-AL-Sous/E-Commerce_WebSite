@@ -13,6 +13,9 @@ import makeAnimated from "react-select/animated";
 import notify from "../../Hooks/ToastNotifications";
 import { GetSubCategory } from "../../Redux/Actions/SubCategoryAction";
 
+// react-router-dom
+import { useNavigate } from "react-router-dom";
+
 // Reselect
 import { createSelector } from "reselect";
 
@@ -23,6 +26,7 @@ const selectProductData = createSelector(
 );
 
 const EditProductHook = (id) => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const product = useSelector(selectProductData);
 
@@ -199,8 +203,31 @@ const EditProductHook = (id) => {
 
     const response = await dispatch(UpdateProduct({ id, formData }));
 
-    if (response?.success) {
+    if (response.success) {
+      setFormInputProduct({
+        ProductName: "",
+        ProductDescription: "",
+        ProductAvailableQuantity: "",
+        ProductPriceBeforeDiscount: "",
+        ProductPrice: "",
+        ProductMaincategoryId: "",
+        ProductSubcategoriesId: [],
+        ProductSelectedSubcategoriesId: [],
+        ProductBrandId: "",
+        ProductColors: [],
+      });
+
+      // Reset images after product creation
+      setImages([]);
+
+      // Reset selects
+      setSelectedOptions([]); // التصنيفات الفرعية
+
       notify("تم تعديل المنتج بنجاح", "success");
+
+      setTimeout(() => {
+        navigate("/admin/allproducts"); // <-- فقط المسار النسبي داخل المشروع
+      }, 2000);
     } else {
       notify(response?.message || "حدث خطأ أثناء التعديل", "error");
     }
