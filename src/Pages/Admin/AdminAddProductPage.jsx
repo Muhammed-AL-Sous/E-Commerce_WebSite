@@ -290,7 +290,7 @@ const AdminAddProductPage = () => {
                   }
                 >
                   <option value="">إختر الماركة </option>
-                  {BrandsData.data
+                  {Array.isArray(BrandsData?.data) && BrandsData.data.length > 0
                     ? BrandsData.data.map((item) => (
                         <option value={item._id} key={item._id}>
                           {item.name}

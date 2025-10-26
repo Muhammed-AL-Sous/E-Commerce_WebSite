@@ -9,6 +9,7 @@ import CategoriesReducer from "./Reducers/CategoriesReducer";
 import BrandsReducer from "./Reducers/BrandsReducer";
 import SubCategoriesReducer from "./Reducers/SubCategoryReducer";
 import ProductsReducer from "./Reducers/ProductsReducer";
+import { searchReducer } from "./Reducers/SearchReducer";
 
 const initialState = {};
 const middleware = [thunk];
@@ -18,6 +19,7 @@ const rootReaducer = combineReducers({
   Brands: BrandsReducer,
   SubCategories: SubCategoriesReducer,
   Products: ProductsReducer,
+  search: searchReducer,
 });
 
 const store = createStore(

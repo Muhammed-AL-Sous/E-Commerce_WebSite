@@ -22,3 +22,6 @@ export const delete_product = "Delete_Product";
 
 // Errors
 export const get_error = "Error";
+
+// Search Products
+export const SET_SEARCH_KEYWORD = "SET_SEARCH_KEYWORD";

@@ -1,6 +1,7 @@
 // React BootStrap
 import { Col, Container, Row } from "react-bootstrap";
 
+
 // Components
 import CategoriesHeader from "../../Components/Categories/CategoriesHeader";
 import SearchCountResult from "../../Components/Utility/SearchCountResult";
@@ -12,7 +13,7 @@ import Pagination from "../../Components/Utility/Pagination";
 import ViewSearchProductsHook from "../../Hooks/Products/ViewSearchProductsHook";
 
 const ShopProductsPage = () => {
-  const [items, pageCount, getPage] = ViewSearchProductsHook();
+  const [items, pageCount, getPage, productLoader] = ViewSearchProductsHook();
 
   return (
     <div style={{ minHeight: "100vh" }}>
@@ -24,7 +25,12 @@ const ShopProductsPage = () => {
             <SideFilter />
           </Col>
           <Col>
-            <ProductsContainer ProductsData={items} title="" btnTitle="" />
+            <ProductsContainer
+              productLoader={productLoader}
+              ProductsData={items}
+              title=""
+              btnTitle=""
+            />
           </Col>
         </Row>
         {pageCount > 1 ? (
