@@ -10,17 +10,20 @@ const ViewSearchProductsHook = () => {
   const ProductsData = useSelector((state) => state.Products.allProducts);
   const productLoader = useSelector((state) => state.Products.Loading);
   const searchWords = useSelector((state) => state.search.keyword);
+  const sortType = useSelector((state) => state.sortingProducts.sort_type);
   const dispatch = useDispatch();
 
   const getProducts = async () => {
     await dispatch(
-      GetProductsWithQueryString(`limit=3&keyword=${searchWords}`)
+      GetProductsWithQueryString(
+        `limit=3&keyword=${searchWords}&sort=${sortType}`
+      )
     );
   };
 
   useEffect(() => {
     getProducts();
-  }, [searchWords]);
+  }, [searchWords, sortType]);
 
   let items = [];
 
@@ -41,7 +44,11 @@ const ViewSearchProductsHook = () => {
 
   // When The Paginations Items Are Pressed
   const getPage = (page) => {
-    dispatch(GetAllProductsWithPage(page, 3));
+    dispatch(
+      GetProductsWithQueryString(
+        `limit=3&keyword=${searchWords}&sort=${sortType}&page=${page}`
+      )
+    );
   };
 
   return [items, pageCount, getPage, productLoader, getProducts];

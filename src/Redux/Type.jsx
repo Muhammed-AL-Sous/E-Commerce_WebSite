@@ -25,3 +25,6 @@ export const get_error = "Error";
 
 // Search Products
 export const SET_SEARCH_KEYWORD = "SET_SEARCH_KEYWORD";
+
+// Sort Products
+export const SET_SORT_TYPE = "SET_SORT_TYPE";
