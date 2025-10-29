@@ -12,6 +12,10 @@ const ProductDetailsPage = () => {
   const { id } = useParams();
   const { similarProducts } = useViewProductDetailsHook(id);
 
+  const filteredSimilarProducts = similarProducts.filter(
+    (card) => card._id != id
+  );
+
   return (
     <div style={{ minHeight: "425px" }}>
       <CategoriesHeader />
@@ -22,7 +26,7 @@ const ProductDetailsPage = () => {
         <RateContainer pageCount={0} onPageChange={() => {}} />
 
         <ProductsContainer
-          ProductsData={similarProducts || []}
+          ProductsData={filteredSimilarProducts || []}
           title="منتجات قد تعجبك"
         />
       </Container>

@@ -5,9 +5,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState, useEffect } from "react";
 import { Offcanvas, Button } from "react-bootstrap";
 
-const SideFilter = () => {
-  // React States
+// Filtering SideBar Hook
+import useSideFilterBarHook from "../../Hooks/Products/useSideFilterBarHook";
 
+const SideFilter = () => {
+  const { AllCategories, AllBrands } = useSideFilterBarHook();
+
+  // React States
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
   const [show, setShow] = useState(false);
 
@@ -40,44 +44,29 @@ const SideFilter = () => {
                 <div className="main-classes">
                   <h3>الفئة</h3>
                   <div>
-                    <input type="checkbox" />
-                    <label>الكل</label>
+                    <input type="checkbox" id="all-categories" />
+                    <label htmlFor="all-categories">الكل</label>
                   </div>
-                  <div>
-                    <input type="checkbox" />
-                    <label>أجهزة منزلية</label>
-                  </div>
-
-                  <div>
-                    <input type="checkbox" />
-                    <label>أجهزة كهربائية</label>
-                  </div>
-
-                  <div>
-                    <input type="checkbox" />
-                    <label>إلكترونيات</label>
-                  </div>
-
-                  <div>
-                    <input type="checkbox" />
-                    <label>تخفيضات</label>
-                  </div>
+                  {AllCategories.map((category) => (
+                    <div key={category._id}>
+                      <input type="checkbox" id={category._id} />
+                      <label htmlFor={category._id}>{category.name}</label>
+                    </div>
+                  ))}
                 </div>
 
                 <div className="main-brands">
                   <h3>الماركة</h3>
                   <div>
-                    <input type="checkbox" />
-                    <label>الكل</label>
+                    <input type="checkbox" id="all-brands" />
+                    <label htmlFor="all-brands">الكل</label>
                   </div>
-                  <div>
-                    <input type="checkbox" />
-                    <label>آبل</label>
-                  </div>
-                  <div>
-                    <input type="checkbox" />
-                    <label>سامسونغ</label>
-                  </div>
+                  {AllBrands.map((brand) => (
+                    <div key={brand._id}>
+                      <input type="checkbox" id={brand._id} />
+                      <label htmlFor={brand._id}>{brand.name}</label>
+                    </div>
+                  ))}
                 </div>
 
                 <div className="main-prices">
@@ -120,44 +109,29 @@ const SideFilter = () => {
           <div className="main-classes">
             <h3>الفئة</h3>
             <div>
-              <input type="checkbox" />
-              <label>الكل</label>
+              <input type="checkbox" id="all-categories" />
+              <label htmlFor="all-categories">الكل</label>
             </div>
-            <div>
-              <input type="checkbox" />
-              <label>أجهزة منزلية</label>
-            </div>
-
-            <div>
-              <input type="checkbox" />
-              <label>أجهزة كهربائية</label>
-            </div>
-
-            <div>
-              <input type="checkbox" />
-              <label>إلكترونيات</label>
-            </div>
-
-            <div>
-              <input type="checkbox" />
-              <label>تخفيضات</label>
-            </div>
+            {AllCategories.map((category) => (
+              <div key={category._id}>
+                <input type="checkbox" id={category._id} />
+                <label htmlFor={category._id}>{category.name}</label>
+              </div>
+            ))}
           </div>
 
           <div className="main-brands">
             <h3>الماركة</h3>
             <div>
-              <input type="checkbox" />
-              <label>الكل</label>
+              <input type="checkbox" id="all-brands" />
+              <label htmlFor="all-brands">الكل</label>
             </div>
-            <div>
-              <input type="checkbox" />
-              <label>آبل</label>
-            </div>
-            <div>
-              <input type="checkbox" />
-              <label>سامسونغ</label>
-            </div>
+            {AllBrands.map((brand) => (
+              <div key={brand._id}>
+                <input type="checkbox" id={brand._id} />
+                <label htmlFor={brand._id}>{brand.name}</label>
+              </div>
+            ))}
           </div>
 
           <div className="main-prices">
