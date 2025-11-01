@@ -28,3 +28,9 @@ export const SET_SEARCH_KEYWORD = "SET_SEARCH_KEYWORD";
 
 // Sort Products
 export const SET_SORT_TYPE = "SET_SORT_TYPE";
+
+// Sorting Products By Categories
+export const Sorting_By_Categories = "Sorting_By_Categories";
+
+// Sorting Products By Brands
+export const Sorting_By_Brands = "Sorting_By_Brands";

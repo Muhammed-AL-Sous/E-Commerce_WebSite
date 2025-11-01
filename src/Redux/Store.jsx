@@ -11,6 +11,8 @@ import SubCategoriesReducer from "./Reducers/SubCategoryReducer";
 import ProductsReducer from "./Reducers/ProductsReducer";
 import { searchReducer } from "./Reducers/SearchReducer";
 import { SortingProdcutsReducer } from "./Reducers/SortingProductsReducer";
+import { SortingByCategoriesReducer } from "./Reducers/SortingByCategoriesReducer";
+import { SortingByBrandsReducer } from "./Reducers/SortingByBrandsReducer";
 
 const initialState = {};
 const middleware = [thunk];
@@ -21,7 +23,9 @@ const rootReaducer = combineReducers({
   SubCategories: SubCategoriesReducer,
   Products: ProductsReducer,
   search: searchReducer,
-  sortingProducts : SortingProdcutsReducer
+  sortingProducts: SortingProdcutsReducer,
+  SortingByCategories: SortingByCategoriesReducer,
+  SortingByBrands: SortingByBrandsReducer,
 });
 
 const store = createStore(

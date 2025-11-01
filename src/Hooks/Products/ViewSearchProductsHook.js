@@ -11,19 +11,26 @@ const ViewSearchProductsHook = () => {
   const productLoader = useSelector((state) => state.Products.Loading);
   const searchWords = useSelector((state) => state.search.keyword);
   const sortType = useSelector((state) => state.sortingProducts.sort_type);
+  const queryCategories = useSelector(
+    (state) => state.SortingByCategories.categories_checked
+  );
+  const queryBrands = useSelector(
+    (state) => state.SortingByBrands.brands_checked
+  );
+
   const dispatch = useDispatch();
 
   const getProducts = async () => {
     await dispatch(
       GetProductsWithQueryString(
-        `limit=3&keyword=${searchWords}&sort=${sortType}`
+        `limit=3&keyword=${searchWords}&sort=${sortType}&${queryCategories}&${queryBrands}`
       )
     );
   };
 
   useEffect(() => {
     getProducts();
-  }, [searchWords, sortType]);
+  }, [searchWords, sortType, queryCategories, queryBrands]);
 
   let items = [];
 
@@ -46,7 +53,7 @@ const ViewSearchProductsHook = () => {
   const getPage = (page) => {
     dispatch(
       GetProductsWithQueryString(
-        `limit=3&keyword=${searchWords}&sort=${sortType}&page=${page}`
+        `limit=3&keyword=${searchWords}&sort=${sortType}&page=${page}&${queryCategories}&${queryBrands}`
       )
     );
   };

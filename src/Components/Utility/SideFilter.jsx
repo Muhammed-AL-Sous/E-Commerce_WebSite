@@ -9,7 +9,14 @@ import { Offcanvas, Button } from "react-bootstrap";
 import useSideFilterBarHook from "../../Hooks/Products/useSideFilterBarHook";
 
 const SideFilter = () => {
-  const { AllCategories, AllBrands } = useSideFilterBarHook();
+  const {
+    AllCategories,
+    AllBrands,
+    handleCategoriesClick,
+    handleBrandsClick,
+    categoriesChecked,
+    brandsChecked,
+  } = useSideFilterBarHook();
 
   // React States
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
@@ -44,12 +51,24 @@ const SideFilter = () => {
                 <div className="main-classes">
                   <h3>الفئة</h3>
                   <div>
-                    <input type="checkbox" id="all-categories" />
+                    <input
+                      type="checkbox"
+                      id="all-categories"
+                      value=""
+                      onChange={handleCategoriesClick}
+                      checked={categoriesChecked.length === 0}
+                    />
                     <label htmlFor="all-categories">الكل</label>
                   </div>
                   {AllCategories.map((category) => (
                     <div key={category._id}>
-                      <input type="checkbox" id={category._id} />
+                      <input
+                        type="checkbox"
+                        id={category._id}
+                        value={category._id}
+                        onChange={handleCategoriesClick}
+                        checked={categoriesChecked.includes(category._id)}
+                      />
                       <label htmlFor={category._id}>{category.name}</label>
                     </div>
                   ))}
@@ -58,12 +77,24 @@ const SideFilter = () => {
                 <div className="main-brands">
                   <h3>الماركة</h3>
                   <div>
-                    <input type="checkbox" id="all-brands" />
+                    <input
+                      type="checkbox"
+                      id="all-brands"
+                      value=""
+                      onChange={handleBrandsClick}
+                      checked={brandsChecked.length === 0}
+                    />
                     <label htmlFor="all-brands">الكل</label>
                   </div>
                   {AllBrands.map((brand) => (
                     <div key={brand._id}>
-                      <input type="checkbox" id={brand._id} />
+                      <input
+                        type="checkbox"
+                        id={brand._id}
+                        value={brand._id}
+                        onChange={handleBrandsClick}
+                        checked={brandsChecked.includes(brand._id)}
+                      />
                       <label htmlFor={brand._id}>{brand.name}</label>
                     </div>
                   ))}
@@ -109,12 +140,24 @@ const SideFilter = () => {
           <div className="main-classes">
             <h3>الفئة</h3>
             <div>
-              <input type="checkbox" id="all-categories" />
+              <input
+                type="checkbox"
+                id="all-categories"
+                value=""
+                onChange={handleCategoriesClick}
+                checked={categoriesChecked.length === 0}
+              />
               <label htmlFor="all-categories">الكل</label>
             </div>
             {AllCategories.map((category) => (
               <div key={category._id}>
-                <input type="checkbox" id={category._id} />
+                <input
+                  type="checkbox"
+                  id={category._id}
+                  value={category._id}
+                  onChange={handleCategoriesClick}
+                  checked={categoriesChecked.includes(category._id)}
+                />
                 <label htmlFor={category._id}>{category.name}</label>
               </div>
             ))}
@@ -122,13 +165,29 @@ const SideFilter = () => {
 
           <div className="main-brands">
             <h3>الماركة</h3>
+
+            {/* خيار الكل */}
             <div>
-              <input type="checkbox" id="all-brands" />
+              <input
+                type="checkbox"
+                id="all-brands"
+                value=""
+                onChange={handleBrandsClick}
+                checked={brandsChecked.length === 0} // ✅ "الكل" يكون محدد إذا لا توجد ماركات محددة
+              />
               <label htmlFor="all-brands">الكل</label>
             </div>
+
+            {/* باقي الماركات */}
             {AllBrands.map((brand) => (
               <div key={brand._id}>
-                <input type="checkbox" id={brand._id} />
+                <input
+                  type="checkbox"
+                  id={brand._id}
+                  value={brand._id}
+                  onChange={handleBrandsClick}
+                  checked={brandsChecked.includes(brand._id)} // ✅ يعتمد على الحالة
+                />
                 <label htmlFor={brand._id}>{brand.name}</label>
               </div>
             ))}
