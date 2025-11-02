@@ -16,6 +16,10 @@ const SideFilter = () => {
     handleBrandsClick,
     categoriesChecked,
     brandsChecked,
+    priceFrom,
+    setPriceFrom,
+    priceTo,
+    setPriceTo,
   } = useSideFilterBarHook();
 
   // React States
@@ -104,11 +108,19 @@ const SideFilter = () => {
                   <h3>السعر</h3>
                   <div>
                     <label>من</label>
-                    <input type="number" />
+                    <input
+                      type="number"
+                      value={priceFrom}
+                      onChange={(e) => setPriceFrom(e.target.value)}
+                    />
                   </div>
                   <div>
                     <label>إلى</label>
-                    <input type="number" />
+                    <input
+                      type="number"
+                      value={priceTo}
+                      onChange={(e) => setPriceTo(e.target.value)}
+                    />
                   </div>
                   <Button
                     onClick={() => setShow(false)}
@@ -197,11 +209,19 @@ const SideFilter = () => {
             <h3>السعر</h3>
             <div>
               <label>من</label>
-              <input type="number" />
+              <input
+                type="number"
+                value={priceFrom}
+                onChange={(e) => setPriceFrom(e.target.value)}
+              />
             </div>
             <div>
               <label>إلى</label>
-              <input type="number" />
+              <input
+                type="number"
+                value={priceTo}
+                onChange={(e) => setPriceTo(e.target.value)}
+              />
             </div>
           </div>
         </>

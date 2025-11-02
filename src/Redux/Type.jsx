@@ -34,3 +34,9 @@ export const Sorting_By_Categories = "Sorting_By_Categories";
 
 // Sorting Products By Brands
 export const Sorting_By_Brands = "Sorting_By_Brands";
+
+// Sorting Products By Price Greater Than
+export const Sorting_By_Price_Gte = "Sorting_By_Price_Gte";
+
+// Sorting Products By Price Less Than
+export const Sorting_By_Price_Lte = "Sorting_By_Price_Lte";

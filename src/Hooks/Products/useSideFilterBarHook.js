@@ -5,6 +5,10 @@ import { GetAllCategories } from "../../Redux/Actions/CategoriesAction";
 import { GetAllBrands } from "../../Redux/Actions/BrandsAction";
 import { SortingByCategories } from "../../Redux/Actions/SortingByCategoriesActions";
 import { SortingByBrands } from "../../Redux/Actions/SortingByBrandsActions";
+import {
+  SortingByPriceGte,
+  SortingByPriceLte,
+} from "../../Redux/Actions/SortingByPricesActions";
 
 const useSideFilterBarHook = () => {
   const CategoriesData = useSelector((state) => state.Categories.Categories);
@@ -12,6 +16,8 @@ const useSideFilterBarHook = () => {
   const dispatch = useDispatch();
   const [categoriesChecked, setCategoriesChecked] = useState([]);
   const [brandsChecked, setBrandsChecked] = useState([]);
+  const [priceFrom, setPriceFrom] = useState("");
+  const [priceTo, setPriceTo] = useState("");
 
   useEffect(() => {
     const FetchData = async () => {
@@ -83,6 +89,21 @@ const useSideFilterBarHook = () => {
     dispatch(SortingByBrands(queryBrands));
   }, [categoriesChecked, brandsChecked]);
 
+  useEffect(() => {
+    // لا تُرسل أكشنات إذا كانت القيم فارغة
+    if (priceFrom !== "") {
+      dispatch(SortingByPriceGte(priceFrom));
+    } else {
+      dispatch(SortingByPriceGte(null)); // لتفريغ الفلتر
+    }
+
+    if (priceTo !== "") {
+      dispatch(SortingByPriceLte(priceTo));
+    } else {
+      dispatch(SortingByPriceLte(null));
+    }
+  }, [priceFrom, priceTo]);
+
   return {
     AllCategories,
     AllBrands,
@@ -90,6 +111,10 @@ const useSideFilterBarHook = () => {
     handleBrandsClick,
     categoriesChecked,
     brandsChecked,
+    priceFrom,
+    setPriceFrom,
+    priceTo,
+    setPriceTo,
   };
 };
 

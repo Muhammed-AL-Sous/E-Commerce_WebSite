@@ -17,20 +17,22 @@ const ViewSearchProductsHook = () => {
   const queryBrands = useSelector(
     (state) => state.SortingByBrands.brands_checked
   );
-
+  const priceGte = useSelector((state) => state.SortingByPrices.price_gte);
+  const priceLte = useSelector((state) => state.SortingByPrices.price_lte);
   const dispatch = useDispatch();
-
-  const getProducts = async () => {
-    await dispatch(
-      GetProductsWithQueryString(
-        `limit=3&keyword=${searchWords}&sort=${sortType}&${queryCategories}&${queryBrands}`
-      )
-    );
-  };
 
   useEffect(() => {
     getProducts();
-  }, [searchWords, sortType, queryCategories, queryBrands]);
+  }, [searchWords, sortType, queryCategories, queryBrands, priceGte, priceLte]);
+
+  const getProducts = async () => {
+    let query = `limit=3&keyword=${searchWords}&sort=${sortType}&${queryCategories}&${queryBrands}`;
+
+    if (priceGte) query += `&price[gte]=${priceGte}`;
+    if (priceLte) query += `&price[lte]=${priceLte}`;
+
+    await dispatch(GetProductsWithQueryString(query));
+  };
 
   let items = [];
 
@@ -51,11 +53,10 @@ const ViewSearchProductsHook = () => {
 
   // When The Paginations Items Are Pressed
   const getPage = (page) => {
-    dispatch(
-      GetProductsWithQueryString(
-        `limit=3&keyword=${searchWords}&sort=${sortType}&page=${page}&${queryCategories}&${queryBrands}`
-      )
-    );
+    let query = `limit=3&keyword=${searchWords}&sort=${sortType}&page=${page}&${queryCategories}&${queryBrands}`;
+    if (priceGte) query += `&price[gte]=${priceGte}`;
+    if (priceLte) query += `&price[lte]=${priceLte}`;
+    dispatch(GetProductsWithQueryString(query));
   };
 
   return [items, pageCount, getPage, productLoader, getProducts];
