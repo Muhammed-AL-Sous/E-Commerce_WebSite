@@ -40,3 +40,6 @@ export const Sorting_By_Price_Gte = "Sorting_By_Price_Gte";
 
 // Sorting Products By Price Less Than
 export const Sorting_By_Price_Lte = "Sorting_By_Price_Lte";
+
+// Authentication
+export const Creat_New_User = "Creat_New_User";

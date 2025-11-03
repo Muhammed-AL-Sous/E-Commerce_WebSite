@@ -14,6 +14,7 @@ import { SortingProdcutsReducer } from "./Reducers/SortingProductsReducer";
 import { SortingByCategoriesReducer } from "./Reducers/SortingByCategoriesReducer";
 import { SortingByBrandsReducer } from "./Reducers/SortingByBrandsReducer";
 import { SortingByPricesReducer } from "./Reducers/SortingByPricesReducer";
+import { AuthReducer } from "./Reducers/AuthReducer";
 
 const initialState = {};
 const middleware = [thunk];
@@ -28,6 +29,7 @@ const rootReaducer = combineReducers({
   SortingByCategories: SortingByCategoriesReducer,
   SortingByBrands: SortingByBrandsReducer,
   SortingByPrices: SortingByPricesReducer,
+  Authentication: AuthReducer,
 });
 
 const store = createStore(

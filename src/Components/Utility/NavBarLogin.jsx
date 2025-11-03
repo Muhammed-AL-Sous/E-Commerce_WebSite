@@ -16,7 +16,21 @@ import cart from "../../assets/images/cart.png";
 import { useDispatch, useSelector } from "react-redux";
 import { setSearchKeyword } from "../../Redux/Actions/SearchActions";
 
+// React Router Dom
+import { useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
+
 function NavBarLogin() {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const onChangeSearch = (e) => {
+    dispatch(setSearchKeyword(e.target.value));
+    if (location.pathname != "/products") {
+      navigate("/products");
+    }
+  };
+
   const dispatch = useDispatch();
   const searchWords = useSelector((state) => state.search.keyword);
   return (
@@ -32,7 +46,7 @@ function NavBarLogin() {
         <Navbar.Collapse id="navbarScroll">
           <Form.Control
             value={searchWords}
-            onChange={(e) => dispatch(setSearchKeyword(e.target.value))}
+            onChange={onChangeSearch}
             type="search"
             placeholder="ابحث"
             className="me-2 my-2 w-100"
