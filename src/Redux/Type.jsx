@@ -43,3 +43,4 @@ export const Sorting_By_Price_Lte = "Sorting_By_Price_Lte";
 
 // Authentication
 export const Creat_New_User = "Creat_New_User";
+export const Login_User = "Login_User";

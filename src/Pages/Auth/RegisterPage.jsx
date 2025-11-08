@@ -157,7 +157,12 @@ const RegisterPage = () => {
             </Link>
           </Form.Text>
         </Form>
-        {registerForm.loading ? <Spinner animation="border" /> : null}
+        {registerForm.loading ? (
+          <Spinner
+            animation="border"
+            style={{ position: "absolute", color: "white", top: "90%" }}
+          />
+        ) : null}
         <ToastContainer />
       </Container>
     </div>

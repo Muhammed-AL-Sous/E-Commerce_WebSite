@@ -8,6 +8,9 @@ import notify from "../ToastNotifications";
 import { useDispatch } from "react-redux";
 import { CreateNewUser } from "../../Redux/Actions/AuthActions";
 
+// React Router Dom
+import { useNavigate } from "react-router-dom";
+
 const RegisterSignUpHook = () => {
   const [registerForm, setRegisterForm] = useState({
     name: "",
@@ -19,6 +22,7 @@ const RegisterSignUpHook = () => {
   });
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   // ✅ التحقق من صحة الإدخال
   const formValidation = () => {
@@ -73,9 +77,26 @@ const RegisterSignUpHook = () => {
       });
 
       notify("تم إنشاء حساب جديد بنجاح", "success");
+
+      setTimeout(() => {
+        navigate("/");
+      }, 3000);
     } else {
       setRegisterForm((prev) => ({ ...prev, loading: false }));
-      notify(responseUser.message || "حدث خطأ أثناء إنشاء الحساب", "error");
+      console.log(responseUser.data);
+      if (responseUser.data.errors[0].msg === "E-mail already in use") {
+        notify("هذا الإيميل موجود مسبقاً", "error");
+      }
+
+      if (responseUser.data.errors[0].msg === "must be at least 6 chars") {
+        notify("كلمة المرور يجب ألا تقل عن 6 أحرف", "error");
+      }
+
+      if (
+        responseUser.data.errors[0].msg === "accept only egypt phone numbers"
+      ) {
+        notify("لا تقبل سوى أرقام الهواتف المصرية", "error");
+      }
     }
   };
 

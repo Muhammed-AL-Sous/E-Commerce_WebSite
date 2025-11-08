@@ -5,7 +5,15 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
+// External Libraries
+import { ToastContainer } from "react-toastify";
+
+// Custom Hook Login
+import LoginPageHook from "../../Hooks/Auth/LoginPageHook";
+
 const LoginPage = () => {
+  const { loginForm, setLoginForm, handleSubmitClick } = LoginPageHook();
+
   return (
     <div className="login-main-div">
       <Link to="/">
@@ -15,7 +23,7 @@ const LoginPage = () => {
         </Button>
       </Link>
       <Container className="login-container">
-        <Form className="form-login">
+        <Form className="form-login" onSubmit={handleSubmitClick}>
           <Form.Text className="form-title">تسجيل الدخول</Form.Text>
           <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Label>
@@ -26,6 +34,10 @@ const LoginPage = () => {
               className="input-email"
               type="email"
               placeholder="أدخل الإيميل الخاص بك"
+              value={loginForm.email}
+              onChange={(e) =>
+                setLoginForm({ ...loginForm, email: e.target.value })
+              }
             />
             <Form.Text
               style={{
@@ -48,6 +60,10 @@ const LoginPage = () => {
               type="password"
               placeholder="أدخل كلمة المرور الخاصة بك"
               className="input-pass"
+              value={loginForm.password}
+              onChange={(e) =>
+                setLoginForm({ ...loginForm, password: e.target.value })
+              }
             />
           </Form.Group>
           <Form.Group className="mb-3" controlId="formBasicCheckbox">
@@ -100,6 +116,7 @@ const LoginPage = () => {
           <span>الدخول بحساب المستخدم</span>
         </Button>
       </Link>
+      <ToastContainer />
     </div>
   );
 };
